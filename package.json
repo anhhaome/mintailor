@@ -1,0 +1,25 @@
+{
+  "name": "mintailor",
+  "version": "0.0.1",
+  "description": "A Tailwind CSS Components",
+  "main": "index.js",
+  "scripts": {
+    "watch-css": "npx tailwindcss -i ./src/main.css -o ./dist/output.css --watch",
+    "live": "cd dist && live-server",
+    "dev": "npm run live & npm run watch-css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anhhaome/mintailor.git"
+  },
+  "author": "anhhao.me <hi@anhhao.me>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/anhhaome/mintailor/issues"
+  },
+  "homepage": "https://github.com/anhhaome/mintailor#readme",
+  "devDependencies": {
+    "live-server": "^1.2.1",
+    "tailwindcss": "^3.0.22"
+  }
+}
