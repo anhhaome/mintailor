@@ -1,4 +1,7 @@
+const plugin = require('tailwindcss/plugin')
+
 module.exports = {
+  darkMode: 'class',
   content: ["./dist/**/*.{html,js}"],
   theme: {
     fontFamily: {
@@ -6,5 +9,9 @@ module.exports = {
     },
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    plugin(function({ addBase, addVariant, theme }) {
+      addVariant('m-active', '&[active]');
+    })
+  ],
 }
