@@ -6,7 +6,8 @@
   "scripts": {
     "watch-css": "npx tailwindcss -i ./src/main.css -o ./dist/output.css --watch",
     "live": "cd dist && live-server",
-    "dev": "npm run live & npm run watch-css"
+    "dev": "npm run live & npm run watch-css",
+    "deploy": "push-dir --dir=dist --branch=gh-pages --cleanup"
   },
   "repository": {
     "type": "git",
@@ -20,6 +21,7 @@
   "homepage": "https://github.com/anhhaome/mintailor#readme",
   "devDependencies": {
     "live-server": "^1.2.1",
+    "push-dir": "^0.4.1",
     "tailwindcss": "^3.0.22"
   }
 }
