@@ -6,64 +6,93 @@
   <link href="/output.css" rel="stylesheet">
 </head>
 <body class="antialiased dark:bg-stone-800 dark:text-white">
-  <div class="flex">
+  
+  <div class="flex relative">
     <!-- NAVIGATOR -->
-    <div class="w-72 px-8 h-screen">
-      <nav class="h-[calc(100%-4em)]">
-        <h5 class="font-bold mt-4 mb-2">Overview</h5>
+    <input class="peer hidden" type="checkbox" id="m-nav-expand">
+    <label
+      class="p-1.5 absolute border rounded-full cursor-pointer left-72 ml-[-1.15rem] top-4 bg-white transition-all z-40 
+      peer-checked:rotate-180 peer-checked:left-8
+      dark:bg-black dark:border-black" 
+      for="m-nav-expand"
+    >
+      <ion-icon class="block text-xl" name="chevron-back-outline"></ion-icon>
+    </label>
 
-        <a class="flex items-center rounded-lg text-stone-500 
+    <div 
+      id="m-nav-panel"
+      class="w-72 px-8 h-screen border-r group transition-all absolute bg-white z-30
+        md:static 
+        mactive:w-16 mactive:px-2
+        dark:border-black dark:bg-stone-800">
+      <nav class="h-[calc(100%-3.5em)]
+        group-mactive:h-[calc(100%-6.5em)]"
+      >
+        <h5 class="font-bold mt-4 mb-2
+          group-mactive:mt-16"
+        >
+          <span class="group-mactive:hidden">Overview</span>
+        </h5>
+
+        <a class="flex items-center rounded-lg text-stone-500 my-1
           dark:text-stone-400
           hover:bg-stone-100 hover:text-black
           dark:hover:bg-black dark:hover:text-white
-          m-active:bg-stone-100 m-active:text-black
-          dark:m-active:bg-black dark:m-active:text-white"  
+          mactive:bg-stone-100 mactive:text-black
+          dark:mactive:bg-black dark:mactive:text-white"  
           href="/"
         >
           <span class="block p-3">
             <ion-icon class="block text-xl" name="home-outline"></ion-icon>
           </span>
-          <span class="block">Introduction</span>
+          <span class="block group-mactive:hidden">Introduction</span>
         </a>
 
-        <h5 class="font-bold mt-4 mb-2">Components</h5>
+        <h5 class="font-bold mt-4 mb-2
+          group-mactive:mt-2 group-mactive:border-b
+          dark:border-black"
+        >
+          <span class="group-mactive:hidden">Components</span>
+        </h5>
 
-        <a class="flex items-center rounded-lg text-stone-500 
+        <a class="flex items-center rounded-lg text-stone-500 my-1
           dark:text-stone-400
           hover:bg-stone-100 hover:text-black
           dark:hover:bg-black dark:hover:text-white
-          m-active:bg-stone-100 m-active:text-black
-          dark:m-active:bg-black dark:m-active:text-white"  
+          mactive:bg-stone-100 mactive:text-black
+          dark:mactive:bg-black dark:mactive:text-white"  
           href="/button.html"
         >
           <span class="block p-3">
             <ion-icon class="block text-xl" name="play-circle-outline"></ion-icon>
           </span>
-          <span class="block">Button</span>
+          <span class="block group-mactive:hidden">Button</span>
         </a>
 
-        <a class="flex items-center rounded-lg text-stone-500 
+        <a class="flex items-center rounded-lg text-stone-500 my-1
           dark:text-stone-400
           hover:bg-stone-100 hover:text-black
           dark:hover:bg-black dark:hover:text-white
-          m-active:bg-stone-100 m-active:text-black
-          dark:m-active:bg-black dark:m-active:text-white"  
+          mactive:bg-stone-100 mactive:text-black
+          dark:mactive:bg-black dark:mactive:text-white"  
           href="/input.html"
           active
         >
           <span class="block p-3">
             <ion-icon class="block text-xl" name="reader-outline"></ion-icon>
           </span>
-          <span class="block">Input</span>
+          <span class="block group-mactive:hidden">Input</span>
         </a>
       </nav>
 
       <div class="flex items-center justify-center">
-        <div class="uppercase text-stone-500 pt-1 px-2 text-sm">
+        <div class="uppercase text-stone-500 pt-1 px-2 text-sm
+          group-mactive:hidden"
+        >
           Light
         </div>
         <div class="text-xl">
-          <input class="hidden peer" id="theme-selector" type="checkbox">
+          <input class="hidden peer" id="m-theme-selector" type="checkbox">
           <label 
             class="inline-block bg-stone-200 rounded-full w-[2em] h-[1em] select-none align-middle
               dark:bg-stone-700
@@ -72,10 +101,12 @@
               before:transition-all
               peer-checked:bg-black peer-checked:before:ml-[1.05em]
               dark:peer-checked:bg-white"
-            for="theme-selector"
+            for="m-theme-selector"
           ></label>
         </div>
-        <div class="uppercase text-stone-500 pt-1 px-2 text-sm">
+        <div class="uppercase text-stone-500 pt-1 px-2 text-sm
+          group-mactive:hidden"
+        >
           Dark
         </div>
       </div>
@@ -83,7 +114,9 @@
     <!-- END NAVIGATOR -->
 
     <!-- CONTENT -->
-    <div>
+    <div class="ml-16 px-4 flex-1
+      md:px-8 md:ml-0
+    ">
       <h1 class="mt-4 text-3xl font-bold">Input</h1>
     </div>
     <!-- END CONTENT -->
@@ -92,6 +125,13 @@
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
   <script>
+    function toBoolean(v){
+      if (typeof v === 'string')
+        return v === 'true';
+
+      return !!v;
+    }
+
     function autoTheme(){
       if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
         document.documentElement.classList.add('dark');
@@ -99,6 +139,10 @@
       } else {
         document.documentElement.classList.remove('dark');
         themeSelector.checked = false;
+      }
+
+      if ((toBoolean(localStorage.fullnav) && !navExpand.checked) || (!toBoolean(localStorage.fullnav) && navExpand.checked)){
+        navExpand.click();
       }
     }
 
@@ -108,10 +152,30 @@
       autoTheme();
     }
 
-    const themeSelector = document.getElementById('theme-selector');
+    const themeSelector = document.getElementById('m-theme-selector');
     themeSelector.addEventListener('change', e => {
       toggleMode(e.target.checked ? 'dark' : 'light');
     });
+
+    const navPanel = document.getElementById('m-nav-panel');
+    const navExpand = document.getElementById('m-nav-expand');
+    navExpand.addEventListener('change', e => {
+      if (e.target.checked){
+        navPanel.setAttribute('active', true);
+        localStorage.fullnav = true;
+      } else {
+        navPanel.removeAttribute('active');
+        localStorage.fullnav = false;
+      }
+
+      autoTheme();
+    });
+
+    window.addEventListener('load', () => {
+      if (window.innerWidth < 768 && !toBoolean(localStorage.fullnav)){
+        navExpand.click();
+      }
+    })
 
     autoTheme();
   </script>

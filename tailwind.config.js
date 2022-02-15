@@ -11,7 +11,8 @@ module.exports = {
   },
   plugins: [
     plugin(function({ addBase, addVariant, theme }) {
-      addVariant('m-active', '&[active]');
+      addVariant('mactive', '&[active]');
+      addVariant('group-mactive', ':merge(.group)[active] &');
     })
   ],
 }
