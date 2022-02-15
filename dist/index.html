@@ -3,15 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="/output.css" rel="stylesheet">
+  <link href="output.css?v=0.0.1" rel="stylesheet">
+
+  <link rel="stylesheet" href="prism.css">
 </head>
 <body class="antialiased dark:bg-stone-800 dark:text-white">
   
-  <div class="flex relative">
+  <div class="relative">
     <!-- NAVIGATOR -->
     <input class="peer hidden" type="checkbox" id="m-nav-expand">
     <label
-      class="p-1.5 absolute border rounded-full cursor-pointer left-72 ml-[-1.15rem] top-4 bg-white transition-all z-40 
+    class="p-1.5 fixed border rounded-full cursor-pointer left-72 ml-[-1.15rem] top-4 bg-white transition-all z-40 
       peer-checked:rotate-180 peer-checked:left-8
       dark:bg-black dark:border-black" 
       for="m-nav-expand"
@@ -21,8 +23,7 @@
 
     <div 
       id="m-nav-panel"
-      class="w-72 px-8 h-screen border-r group transition-all absolute bg-white z-30
-        md:static 
+      class="w-72 px-8 h-screen border-r group transition-all fixed bg-white z-30 top-0
         mactive:w-16 mactive:px-2
         dark:border-black dark:bg-stone-800">
       <nav class="h-[calc(100%-3.5em)]
@@ -114,10 +115,10 @@
     <!-- END NAVIGATOR -->
 
     <!-- CONTENT -->
-    <div class="ml-16 px-4 flex-1
-      md:px-8 md:ml-0
+    <div class="ml-72 px-4 md-7
+      peer-checked:ml-16
     ">
-      <h1 class="mt-4 text-3xl font-bold">Min<span class="text-sky-600">tailor</span></h1>
+      <h1 class="mt-8 text-3xl font-bold">Min<span class="text-sky-600">tailor</span></h1>
       <p>A Minimal Tailwind CSS Components</p>
     </div>
     <!-- END CONTENT -->
@@ -125,6 +126,8 @@
 
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  <script src="prism.js"></script>
+
   <script>
     function toBoolean(v){
       if (typeof v === 'string')
@@ -179,6 +182,40 @@
     })
 
     autoTheme();
+
+    // highlight code
+    const blocks = document.querySelectorAll('.codeblock');
+    for (let block of blocks){
+      let preview = document.createElement('div');
+      preview.className = 'preview';
+      preview.innerHTML = block.innerHTML;
+
+      let code = document.createElement('pre');
+      code.className = 'code';
+
+      let raw = preview.innerHTML.replace(/^\s+$/gm, '').trim();
+      let minTab = Math.min.apply(null, raw.split('\n').filter(i => i).slice(1).map(row => {
+        let i = 0;
+        while (i < row.length){
+          if (row[i] === ' '){
+            i++;
+            continue;
+          }
+
+          break;
+        }
+        
+        return i
+      }));
+
+      raw = raw.replace(new RegExp(`^\\s{${minTab}}`, 'gm'), '');
+
+      let html = Prism.highlight(raw, Prism.languages.html, 'html');
+      code.innerHTML = html;
+
+      block.innerHTML = preview.outerHTML;
+      block.appendChild(code);
+    }
   </script>
 </body>
 </html>
