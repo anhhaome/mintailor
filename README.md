@@ -1,6 +1,6 @@
 # Mintailor
 
-[Demo](https://mintailor.anhhao.me/)
+[Demo](https://git.anhhao.me/mintailor/)
 
 ## License
 

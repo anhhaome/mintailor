@@ -13,7 +13,7 @@
     <!-- NAVIGATOR -->
     <input class="peer hidden" type="checkbox" id="m-nav-expand">
     <label
-      class="p-1.5 fixed border rounded-full cursor-pointer left-72 ml-[-1.15rem] top-4 bg-white transition-all z-40 
+    class="p-1.5 fixed border rounded-full cursor-pointer left-72 ml-[-1.15rem] top-4 bg-white transition-all z-40 
       peer-checked:rotate-180 peer-checked:left-8
       dark:bg-black dark:border-black" 
       for="m-nav-expand"
@@ -41,7 +41,7 @@
           dark:hover:bg-black dark:hover:text-white
           mactive:bg-stone-100 mactive:text-black
           dark:mactive:bg-black dark:mactive:text-white"  
-          href="/"
+          href="/"  
         >
           <span class="block p-3">
             <ion-icon class="block text-xl" name="home"></ion-icon>
@@ -63,7 +63,6 @@
           mactive:bg-stone-100 mactive:text-black
           dark:mactive:bg-black dark:mactive:text-white"  
           href="/button.html"
-          active
         >
           <span class="block p-3">
             <ion-icon class="block text-xl" name="play-circle"></ion-icon>
@@ -78,6 +77,7 @@
           mactive:bg-stone-100 mactive:text-black
           dark:mactive:bg-black dark:mactive:text-white"  
           href="/dropdown.html"
+          active
         >
           <span class="block p-3">
             <ion-icon class="block text-xl" name="caret-down"></ion-icon>
@@ -146,67 +146,21 @@
     <div class="ml-72 px-4 md-7
       peer-checked:ml-16
     ">
-      <h1 class="mt-8 text-3xl font-bold">Button</h1>
-
-      <h2 class="mt-6 text-xl font-bold mb-2">Simple</h2>
+      <h1 class="mt-8 text-3xl font-bold">Dropdown</h1>
 
       <div class="codeblock">
-        <button class="
-          px-3 py-2 rounded font-sans font-semibold inline-flex items-center text-white bg-black 
-          dark:bg-white dark:text-black
-        ">Primary</button>
-        <button class="px-3 py-2 rounded font-sans font-semibold inline-flex items-center text-white bg-stone-600">Secondary</button>
-        <button class="px-3 py-2 rounded font-sans font-semibold inline-flex items-center text-white bg-red-600">Danger</button>
-        <button class="px-3 py-2 rounded font-sans font-semibold inline-flex items-center text-white bg-cyan-600">Info</button>
-        <button class="px-3 py-2 rounded font-sans font-semibold inline-flex items-center text-white bg-amber-600">Warning</button>
-        <button class="px-3 py-2 rounded font-sans font-semibold inline-flex items-center text-white bg-emerald-600">Success</button>
-      </div>
-    
-      <h2 class="mt-6 text-xl font-bold mb-2">Toggle</h2>
-    
-      <div class="codeblock">
-        <input class="hidden peer" id="toggle-01" type="checkbox">
-        <label 
-          class="inline-block bg-stone-200 rounded-full w-[2em] h-[1em] select-none align-middle
-            dark:bg-stone-700
-            before:block before:w-[0.9em] before:h-[0.9em] before:m-[0.05em] before:rounded-full before:bg-white before:shadow
-            dark:before:bg-black
-            before:transition-all
-            peer-checked:bg-black peer-checked:before:ml-[1.05em]
-            dark:peer-checked:bg-white"
-          for="toggle-01"
-        ></label>
-        <label class="inline-block ml-4" for="toggle-01">Normal</label>
-      </div>
-    
-      <div class="codeblock text-lg">
-        <input class="hidden peer" id="toggle-02" type="checkbox">
-        <label 
-          class="inline-block bg-stone-200 rounded-full w-[2em] h-[1em] select-none align-middle
-            dark:bg-stone-700
-            before:block before:w-[0.9em] before:h-[0.9em] before:m-[0.05em] before:rounded-full before:bg-white before:shadow
-            dark:before:bg-black
-            before:transition-all
-            peer-checked:bg-black peer-checked:before:ml-[1.05em]
-            dark:peer-checked:bg-white"
-          for="toggle-02"
-        ></label>
-        <label class="inline-block ml-4" for="toggle-02">Large</label>
-      </div>
-    
-      <div class="codeblock text-xl">
-        <input class="hidden peer" id="toggle-03" type="checkbox">
-        <label 
-          class="inline-block bg-stone-200 rounded-full w-[2em] h-[1em] select-none align-middle
-            dark:bg-stone-700
-            before:block before:w-[0.9em] before:h-[0.9em] before:m-[0.05em] before:rounded-full before:bg-white before:shadow
-            dark:before:bg-black
-            before:transition-all
-            peer-checked:bg-black peer-checked:before:ml-[1.05em]
-            dark:peer-checked:bg-white"
-          for="toggle-03"
-        ></label>
-        <label class="inline-block ml-4" for="toggle-03">Larger</label>
+        <button class="px-3 py-2 rounded font-sans font-semibold inline-flex items-center text-white bg-black peer
+          dark:bg-white dark:text-black">
+          Primary <ion-icon class="ml-2" name="caret-down"></ion-icon>
+        </button>
+        <ul class="hidden w-48 rounded-lg border absolute bg-white mt-2
+          peer-focus:block
+          dark:border-stone-500">
+          <li class="py-2 px-3 border-b dark:border-stone-500">Profile</li>
+          <li class="py-2 px-3 border-b dark:border-stone-500">Settings</li>
+          <li class="py-2 px-3 border-b dark:border-stone-500">Messages</li>
+          <li class="py-2 px-3">Download</li>
+        </ul>
       </div>
     </div>
     <!-- END CONTENT -->
@@ -292,7 +246,7 @@
 
           break;
         }
-
+        
         return i
       }));
 
