@@ -1,0 +1,2 @@
+<%~ await includeFile('.header.eta', { page: { active: 'alert' } }) %>
+<%~ await includeFile('.footer.eta') %>

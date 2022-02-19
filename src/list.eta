@@ -1,0 +1,12 @@
+<%~ await includeFile('.header.eta', { page: { active: 'list' } }) %>
+<h1 class="mt-4 text-3xl font-bold">List</h1>
+
+<div class="codeblock">
+  <ul class="w-48 rounded-lg border dark:border-stone-500">
+    <li class="py-2 px-3 border-b dark:border-stone-500">Profile</li>
+    <li class="py-2 px-3 border-b dark:border-stone-500">Settings</li>
+    <li class="py-2 px-3 border-b dark:border-stone-500">Messages</li>
+    <li class="py-2 px-3">Download</li>
+  </ul>
+</div>
+<%~ await includeFile('.footer.eta') %>

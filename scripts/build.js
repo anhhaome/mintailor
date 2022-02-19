@@ -1,16 +1,12 @@
 const path = require('path');
 const fs = require('fs');
-const Koa = require('koa');
-const request = require('supertest')
+const eta = require('eta');
+const chokidar = require('chokidar');
 
-const createView = require('../');
-const parseRoutes = require('../src/route');
-
-const DEFAULT_PORT = 3000;
-const DEFAULT_INDEX = 'index.html';
+const TIMEOUT = 1000;
 
 const root = path.join(process.cwd(), process.argv[2]);
-const output = path.join(process.cwd(), 'dist');
+const output = path.join(process.cwd(), process.argv[3]);
 
 const cleanOutput = () => {
   if (fs.existsSync(output)){
@@ -23,47 +19,75 @@ const cleanOutput = () => {
   }
 }
 
-if (!fs.existsSync(root)){
-  console.error('Root not found');
-  process.exit();
+const render = async (storage, view, state) => {
+  const absolutePath = path.join(storage, view);
+  if (absolutePath.indexOf(storage) !== 0)
+    throw new Error('cannot include view outside storage');
+
+  const config = {
+    root: storage,
+    views: storage,
+    includeFile(path, data){
+      return render(storage, path, data);
+    }
+  };
+
+  return eta.renderFileAsync(view, state, config);
 }
 
-cleanOutput();
+const buildSource = async () => {
+  const ls = fs.readdirSync(root);
+
+  for (let name of ls){
+    let ua = path.parse(name);
+    let src = path.join(root, name);
+    let dst = path.join(output, name);
+
+    if (ua.name[0] === '.') // skip hidden file
+      continue;
+
+    if (ua.ext === '.eta'){
+      let body = await render(root, ua.name, {});
+      fs.writeFileSync(path.join(output, `${ua.name}.html`), body);
+      continue;
+    }
+
+    fs.copyFileSync(src, dst);
+  }
+}
+
+const cleanAndBuild = async () => {
+  console.log(`+ Clean`)
+  cleanOutput();
+
+  console.log(`+ Build`)
+  await buildSource();
+}
+
+let loop = null;
+
+const updateChange = async () => {
+  console.log('+ Changed. Rebuild.');
+
+  await cleanAndBuild();
+}
+
+const onChange = () => {
+  if (loop)
+    clearTimeout(loop);
+
+  loop = setTimeout(updateChange, TIMEOUT);
+}
 
 ;(async () => {
-  const app = new Koa();
-  app.context.viewRoot = root;
-  app.use(createView());
-  const server = await app.listen(DEFAULT_PORT);
-
-  const routes = parseRoutes(root);
-
-  for (let route of routes){
-    app.context.state = route.params ? { params: route.params } : {};
-    let reqPath = path.join('/', route.path || '/');
-
-    let res = await request(server)
-      [ (route.method || 'get').toLowerCase() ](reqPath);
-
-    if (res.status !== 200){
-      console.error(`Build Error [${res.status} ${reqPath}]: ${res.text}`);
-      continue;
-    }
-
-    let pathInfo = path.parse(reqPath);
-    let dir = path.join(output, pathInfo.dir);
-    if (!fs.existsSync(dir))
-      fs.mkdirSync(dir, { recursive: true });
-
-    let outPath = path.join(dir, `${pathInfo.base || DEFAULT_INDEX}`);
-    if (fs.existsSync(outPath)){
-      console.error(`Output Error [${res.status} ${reqPath}]: File existed!`)
-      continue;
-    }
-
-    console.log(`Write [${res.status} ${reqPath}]`)
-    fs.writeFileSync(outPath, res.text);
+  if (!fs.existsSync(root)){
+    console.error('Root not found');
+    return;
   }
 
-  server.close();
+  console.log(`+ Your are watching: ${root}`);
+  console.log(`+ Your are output: ${output}`);
+
+  // watch change
+  chokidar.watch(root).on('all', () => { onChange() });
 })();

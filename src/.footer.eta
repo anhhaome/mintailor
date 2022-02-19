@@ -1,0 +1,99 @@
+    </div>
+    <!-- END CONTENT -->
+  </div>
+
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  <script src="prism.js"></script>
+
+  <script>
+    function toBoolean(v){
+      if (typeof v === 'string')
+        return v === 'true';
+
+      return !!v;
+    }
+
+    function autoTheme(){
+      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+        themeSelector.checked = true;
+      } else {
+        document.documentElement.classList.remove('dark');
+        themeSelector.checked = false;
+      }
+
+      if ((toBoolean(localStorage.fullnav) && !navExpand.checked) || (!toBoolean(localStorage.fullnav) && navExpand.checked)){
+        navExpand.click();
+      }
+    }
+
+    function toggleMode(mode){
+      localStorage.theme = mode;
+
+      autoTheme();
+    }
+
+    const themeSelector = document.getElementById('m-theme-selector');
+    themeSelector.addEventListener('change', e => {
+      toggleMode(e.target.checked ? 'dark' : 'light');
+    });
+
+    const navPanel = document.getElementById('m-nav-panel');
+    const navExpand = document.getElementById('m-nav-expand');
+    navExpand.addEventListener('change', e => {
+      if (e.target.checked){
+        navPanel.setAttribute('active', true);
+        localStorage.fullnav = true;
+      } else {
+        navPanel.removeAttribute('active');
+        localStorage.fullnav = false;
+      }
+
+      autoTheme();
+    });
+
+    window.addEventListener('load', () => {
+      if (window.innerWidth < 768 && !toBoolean(localStorage.fullnav)){
+        navExpand.click();
+      }
+    })
+
+    autoTheme();
+
+    // highlight code
+    const blocks = document.querySelectorAll('.codeblock');
+    for (let block of blocks){
+      let preview = document.createElement('div');
+      preview.className = 'preview';
+      preview.innerHTML = block.innerHTML;
+
+      let code = document.createElement('pre');
+      code.className = 'code';
+
+      let raw = preview.innerHTML.replace(/^\s+$/gm, '').trim();
+      let minTab = Math.min.apply(null, raw.split('\n').filter(i => i).slice(1).map(row => {
+        let i = 0;
+        while (i < row.length){
+          if (row[i] === ' '){
+            i++;
+            continue;
+          }
+
+          break;
+        }
+        
+        return i
+      }));
+
+      raw = raw.replace(new RegExp(`^\\s{${minTab}}`, 'gm'), '');
+
+      let html = Prism.highlight(raw, Prism.languages.html, 'html');
+      code.innerHTML = html;
+
+      block.innerHTML = preview.outerHTML;
+      block.appendChild(code);
+    }
+  </script>
+</body>
+</html>

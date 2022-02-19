@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "watch-css": "npx tailwindcss -i ./src/main.css -o ./dist/output.css --watch",
-    "live": "nodemon --watch \"$1\" -e .eta,.json -x \"npm run build $2\"",
-    "dev": "npm run live ./src ",
+    "build": "node scripts/build.js",
+    "live": "live-server $2 --no-browser --no-css-inject --wait=500",
+    "dev": "npm run build ./src ./dist & npm run live ./dist & npm run watch-css",
     "deploy": "push-dir --dir=dist --branch=gh-pages --cleanup"
   },
   "repository": {
@@ -20,19 +21,20 @@
   },
   "homepage": "https://github.com/anhhaome/mintailor#readme",
   "devDependencies": {
-    "live-server": "^1.2.1",
-    "push-dir": "^0.4.1",
-    "tailwindcss": "^3.0.22",
+    "@koa/router": "^10.1.1",
     "chai": "^4.3.4",
+    "chokidar": "^3.5.3",
+    "eta": "^1.12.3",
     "koa": "^2.13.4",
+    "live-server": "^1.2.1",
     "mocha": "^9.1.3",
+    "mz": "^2.7.0",
     "nodemon": "^2.0.15",
     "nyc": "^15.1.0",
-    "supertest": "^6.1.6",
-    "@koa/router": "^10.1.1",
-    "eta": "^1.12.3",
-    "mz": "^2.7.0",
     "object-path": "^0.11.8",
-    "ramda": "^0.27.1"
+    "push-dir": "^0.4.1",
+    "ramda": "^0.27.1",
+    "supertest": "^6.1.6",
+    "tailwindcss": "^3.0.22"
   }
 }
