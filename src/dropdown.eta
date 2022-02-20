@@ -1,18 +1,18 @@
-<%~ await includeFile('.header.eta', { page: { active: 'dropdown' } }) %>
+<%~ await includeFile('.parts/header.eta', { page: { active: 'Dropdown' } }) %>
 <h1 class="mt-4 text-3xl font-bold">Dropdown</h1>
 
 <div class="codeblock">
-  <button class="px-3 py-2 rounded font-sans font-semibold inline-flex items-center text-white bg-black peer
+  <button class="px-4 py-2.5 text-sm rounded-lg font-sans font-semibold inline-flex items-center text-white bg-black peer
     dark:bg-white dark:text-black">
     Primary <ion-icon class="ml-2" name="caret-down"></ion-icon>
   </button>
   <ul class="hidden w-48 rounded-lg border absolute bg-white mt-2
     peer-focus:block
     dark:border-stone-500 dark:bg-stone-800">
-    <li class="py-2 px-3 border-b dark:border-stone-500">Profile</li>
-    <li class="py-2 px-3 border-b dark:border-stone-500">Settings</li>
-    <li class="py-2 px-3 border-b dark:border-stone-500">Messages</li>
-    <li class="py-2 px-3">Download</li>
+    <li class="py-2 px-4 border-b dark:border-stone-500">Profile</li>
+    <li class="py-2 px-4 border-b dark:border-stone-500">Settings</li>
+    <li class="py-2 px-4 border-b dark:border-stone-500">Messages</li>
+    <li class="py-2 px-4">Download</li>
   </ul>
 </div>
-<%~ await includeFile('.footer.eta') %>
+<%~ await includeFile('.parts/footer.eta') %>

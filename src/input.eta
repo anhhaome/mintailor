@@ -1,4 +1,4 @@
-<%~ await includeFile('.header.eta', { page: { active: 'input' } }) %>
+<%~ await includeFile('.parts/header.eta', { page: { active: 'Input' } }) %>
 <h1 class="mt-4 text-3xl font-bold">Input</h1>
 <h2 class="mt-6 text-xl font-bold mb-2">Simple</h2>
 <div class="codeblock">
@@ -21,4 +21,4 @@
       Email
   </label>
 </div>
-<%~ await includeFile('.footer.eta') %>
+<%~ await includeFile('.parts/footer.eta') %>

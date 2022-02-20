@@ -1,2 +1,22 @@
-<%~ await includeFile('.header.eta', { page: { active: 'alert' } }) %>
-<%~ await includeFile('.footer.eta') %>
+<%~ await includeFile('.parts/header.eta', { page: { active: 'Alert' } }) %>
+<h1 class="mt-4 text-3xl font-bold">Alert</h1>
+
+<div class="codeblock">
+  <div class="py-3 px-4 mb-4 rounded-lg text-sm bg-cyan-200 text-cyan-800
+    dark:bg-cyan-600 dark:text-cyan-100">
+    Info alert!
+  </div>
+  <div class="py-3 px-4 mb-4 rounded-lg text-sm bg-emerald-200 text-emerald-800
+    dark:bg-emerald-600 dark:text-emerald-100">
+    Success alert!
+  </div>
+  <div class="py-3 px-4 mb-4 rounded-lg text-sm bg-red-200 text-red-800
+    dark:bg-red-600 dark:text-red-100">
+    Danger alert!
+  </div>
+  <div class="py-3 px-4 mb-4 rounded-lg text-sm bg-amber-200 text-amber-800
+    dark:bg-amber-600 dark:text-amber-100">
+    Warning alert!
+  </div>
+</div>
+<%~ await includeFile('.parts/footer.eta') %>

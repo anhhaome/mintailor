@@ -1,18 +1,17 @@
-<%~ await includeFile('.header.eta', { page: { active: 'button' } }) %>
+<%~ await includeFile('.parts/header.eta', { page: { active: 'Button' } }) %>
 <h1 class="mt-4 text-3xl font-bold">Button</h1>
 
 <h2 class="mt-6 text-xl font-bold mb-2">Simple</h2>
 
 <div class="codeblock">
-  <button class="
-    px-3 py-2 rounded font-sans font-semibold inline-flex items-center text-white bg-black 
+  <button class="px-4 py-2.5 rounded-lg text-sm font-sans font-semibold inline-flex items-center text-white bg-black 
     dark:bg-white dark:text-black
   ">Primary</button>
-  <button class="px-3 py-2 rounded font-sans font-semibold inline-flex items-center text-white bg-stone-600">Secondary</button>
-  <button class="px-3 py-2 rounded font-sans font-semibold inline-flex items-center text-white bg-red-600">Danger</button>
-  <button class="px-3 py-2 rounded font-sans font-semibold inline-flex items-center text-white bg-cyan-600">Info</button>
-  <button class="px-3 py-2 rounded font-sans font-semibold inline-flex items-center text-white bg-amber-600">Warning</button>
-  <button class="px-3 py-2 rounded font-sans font-semibold inline-flex items-center text-white bg-emerald-600">Success</button>
+  <button class="px-4 py-2.5 rounded-lg text-sm font-sans font-semibold inline-flex items-center text-white bg-stone-600">Secondary</button>
+  <button class="px-4 py-2.5 rounded-lg text-sm font-sans font-semibold inline-flex items-center text-white bg-red-600">Danger</button>
+  <button class="px-4 py-2.5 rounded-lg text-sm font-sans font-semibold inline-flex items-center text-white bg-cyan-600">Info</button>
+  <button class="px-4 py-2.5 rounded-lg text-sm font-sans font-semibold inline-flex items-center text-white bg-amber-600">Warning</button>
+  <button class="px-4 py-2.5 rounded-lg text-sm font-sans font-semibold inline-flex items-center text-white bg-emerald-600">Success</button>
 </div>
 
 <h2 class="mt-6 text-xl font-bold mb-2">Toggle</h2>
@@ -61,4 +60,4 @@
   ></label>
   <label class="inline-block ml-4" for="toggle-03">Larger</label>
 </div>
-<%~ await includeFile('.footer.eta') %>
+<%~ await includeFile('.parts/footer.eta') %>

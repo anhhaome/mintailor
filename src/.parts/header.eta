@@ -1,0 +1,102 @@
+<%
+  const navigation = [
+    { type: 'label', name: 'Overview' },
+    { type: 'link', name: 'Introduction', link: 'index.html', icon: 'home' },
+    { type: 'label', name: 'Components' },
+    { type: 'link', name: 'Alert', link: 'alert.html', icon: 'alert-circle' },
+    { type: 'link', name: 'Button', link: 'button.html', icon: 'play-circle' },
+    { type: 'link', name: 'Dropdown', link: 'dropdown.html', icon: 'caret-down' },
+    { type: 'link', name: 'List', link: 'list.html', icon: 'list' },
+    { type: 'link', name: 'Input', link: 'input.html', icon: 'reader' }
+  ];
+_%>
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="output.css?v=0.0.2" rel="stylesheet">
+
+  <link rel="stylesheet" href="prism.css">
+</head>
+<body class="antialiased dark:bg-stone-800 dark:text-white">
+  
+  <div class="relative">
+    <!-- NAVIGATOR -->
+    <input class="peer hidden" type="checkbox" id="m-nav-expand">
+    <label
+    class="p-1.5 fixed border rounded-full cursor-pointer left-72 ml-[-1.15rem] top-4 bg-white transition-all z-40 
+      peer-checked:rotate-180 peer-checked:left-8
+      dark:bg-black dark:border-black" 
+      for="m-nav-expand"
+    >
+    <ion-icon class="block text-xl" name="chevron-back"></ion-icon>
+    </label>
+
+    <div 
+      id="m-nav-panel"
+      class="w-72 px-8 h-screen border-r group transition-all fixed bg-white z-30 top-0
+        mactive:w-16 mactive:px-2
+        dark:border-black dark:bg-stone-800">
+      <nav class="h-[calc(100%-3.5em)] 
+        group-mactive:h-[calc(100%-6.5em)]"
+      >
+        <% for (let item of navigation){ %>
+          <% if (item.type === 'label') { %>
+            <h5 class="font-bold mt-4 mb-2 
+              group-mactive:mt-16"
+            >
+              <span class="group-mactive:hidden"><%= item.name %></span>
+            </h5>
+          <% } else { %>
+            <a class="flex items-center rounded-lg text-stone-500 my-1
+              dark:text-stone-400 
+              hover:bg-stone-100 hover:text-black
+              dark:hover:bg-black dark:hover:text-white
+              mactive:bg-stone-100 mactive:text-black
+              dark:mactive:bg-black dark:mactive:text-white"  
+              href="<%= item.link %>"
+              <%= item.name === it.page.active ? 'active' : '' %>
+            >
+              <span class="block p-3">
+                <ion-icon class="block text-xl" name="<%= item.icon %>"></ion-icon>
+              </span>
+              <span class="block group-mactive:hidden"><%= item.name %></span>
+            </a>
+          <% } %>
+        <% } %>
+      </nav>
+
+      <div class="flex items-center justify-center">
+        <div class="uppercase text-stone-500 pt-1 px-2 text-sm
+          group-mactive:hidden"
+        >
+          Light
+        </div>
+        <div class="text-xl">
+          <input class="hidden peer" id="m-theme-selector" type="checkbox">
+          <label 
+            class="inline-block bg-stone-200 rounded-full w-[2em] h-[1em] select-none align-middle
+              dark:bg-stone-700
+              before:block before:w-[0.9em] before:h-[0.9em] before:m-[0.05em] before:rounded-full before:bg-white before:shadow
+              dark:before:bg-black
+              before:transition-all
+              peer-checked:bg-black peer-checked:before:ml-[1.05em]
+              dark:peer-checked:bg-white"
+            for="m-theme-selector"
+          ></label>
+        </div>
+        <div class="uppercase text-stone-500 pt-1 px-2 text-sm
+          group-mactive:hidden"
+        >
+          Dark
+        </div>
+      </div>
+    </div>
+    <!-- END NAVIGATOR -->
+
+    <!-- CONTENT -->
+    <div class="ml-72 px-4 md-7
+      md:px-8 md:py-4
+      peer-checked:ml-16
+    ">
