@@ -7,11 +7,11 @@
   <button class="px-4 py-2.5 rounded-lg text-sm font-sans font-semibold inline-flex items-center text-white bg-black 
     dark:bg-white dark:text-black
   ">Primary</button>
-  <button class="px-4 py-2.5 rounded-lg text-sm font-sans font-semibold inline-flex items-center text-white bg-stone-600">Secondary</button>
-  <button class="px-4 py-2.5 rounded-lg text-sm font-sans font-semibold inline-flex items-center text-white bg-red-600">Danger</button>
-  <button class="px-4 py-2.5 rounded-lg text-sm font-sans font-semibold inline-flex items-center text-white bg-cyan-600">Info</button>
-  <button class="px-4 py-2.5 rounded-lg text-sm font-sans font-semibold inline-flex items-center text-white bg-amber-600">Warning</button>
-  <button class="px-4 py-2.5 rounded-lg text-sm font-sans font-semibold inline-flex items-center text-white bg-emerald-600">Success</button>
+  <button class="px-4 py-2.5 rounded-lg text-sm font-semibold inline-flex items-center text-white bg-stone-600">Secondary</button>
+  <button class="px-4 py-2.5 rounded-lg text-sm font-semibold inline-flex items-center text-white bg-red-600">Danger</button>
+  <button class="px-4 py-2.5 rounded-lg text-sm font-semibold inline-flex items-center text-white bg-cyan-600">Info</button>
+  <button class="px-4 py-2.5 rounded-lg text-sm font-semibold inline-flex items-center text-white bg-amber-600">Warning</button>
+  <button class="px-4 py-2.5 rounded-lg text-sm font-semibold inline-flex items-center text-white bg-emerald-600">Success</button>
 </div>
 
 <h2 class="mt-6 text-xl font-bold mb-2">Toggle</h2>

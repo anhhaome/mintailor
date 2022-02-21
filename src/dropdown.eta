@@ -2,7 +2,7 @@
 <h1 class="mt-4 text-3xl font-bold">Dropdown</h1>
 
 <div class="codeblock">
-  <button class="px-4 py-2.5 text-sm rounded-lg font-sans font-semibold inline-flex items-center text-white bg-black peer
+  <button class="px-4 py-2.5 text-sm rounded-lg font-semibold inline-flex items-center text-white bg-black peer
     dark:bg-white dark:text-black">
     Primary <ion-icon class="ml-2" name="caret-down"></ion-icon>
   </button>

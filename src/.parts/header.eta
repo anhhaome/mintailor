@@ -4,6 +4,7 @@
     { type: 'link', name: 'Introduction', link: 'index.html', icon: 'home' },
     { type: 'label', name: 'Components' },
     { type: 'link', name: 'Alert', link: 'alert.html', icon: 'alert-circle' },
+    { type: 'link', name: 'Breadcrumb', link: 'breadcrumb.html', icon: 'link' },
     { type: 'link', name: 'Button', link: 'button.html', icon: 'play-circle' },
     { type: 'link', name: 'Dropdown', link: 'dropdown.html', icon: 'caret-down' },
     { type: 'link', name: 'List', link: 'list.html', icon: 'list' },
