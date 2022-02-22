@@ -8,7 +8,7 @@
     { type: 'link', name: 'Button', link: 'button.html', icon: 'play-circle' },
     { type: 'link', name: 'Dropdown', link: 'dropdown.html', icon: 'caret-down' },
     { type: 'link', name: 'List', link: 'list.html', icon: 'list' },
-    { type: 'link', name: 'Input', link: 'input.html', icon: 'reader' }
+    { type: 'link', name: 'Input', link: 'input.html', icon: 'brush' }
   ];
 _%>
 <!doctype html>
@@ -44,8 +44,10 @@ _%>
       >
         <% for (let item of navigation){ %>
           <% if (item.type === 'label') { %>
-            <h5 class="font-bold mt-4 mb-2 
-              group-mactive:mt-16"
+            <h5 class="font-bold mt-4 mb-2
+              group-mactive:border-b
+              group-mactive:first:mt-16 group-mactive:first:border-b-0
+              dark:border-black"
             >
               <span class="group-mactive:hidden"><%= item.name %></span>
             </h5>
