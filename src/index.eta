@@ -1,4 +1,6 @@
 <%~ await includeFile('.parts/header.eta', { page: { active: 'Introduction' } }) %>
-<h1 class="mt-4 text-3xl font-bold">Min<span class="text-sky-600">tailor</span></h1>
-<p>A Minimal Tailwind CSS Components</p>
+<h1 class="mt-4 text-3xl">
+  <%~ await includeFile('.components/logo.eta', { noicon: true }) %>
+</h1>
+<p class="mt-2 italic">A Minimal Tailwind CSS Components</p>
 <%~ await includeFile('.parts/footer.eta') %>
