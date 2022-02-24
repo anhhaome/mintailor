@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "watch-css": "npx tailwindcss -i ./src/main.css -o ./dist/output.css --watch",
-    "build": "node scripts/build.js",
-    "live": "live-server $2 --no-browser --no-css-inject --wait=500",
-    "dev": "npm run build ./src ./dist & npm run live ./dist & npm run watch-css",
+    "build": "node scripts/build.js ./src ./dist && npx tailwindcss -i ./src/main.css -o ./dist/output.css",
+    "live": "live-server ./dist --no-browser --no-css-inject --wait=500",
+    "dev": "MINTAILOR_WATCH=1 npm run build & npm run live & npm run watch-css",
     "deploy": "push-dir --dir=dist --branch=gh-pages --cleanup"
   },
   "repository": {

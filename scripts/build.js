@@ -8,6 +8,8 @@ const TIMEOUT = 1000;
 const root = path.join(process.cwd(), process.argv[2]);
 const output = path.join(process.cwd(), process.argv[3]);
 
+const isWatch = !!process.env['MINTAILOR_WATCH'];
+
 const cleanOutput = () => {
   if (fs.existsSync(output)){
     const ls = fs.readdirSync(output);
@@ -87,6 +89,12 @@ const onChange = () => {
 
   console.log(`+ Your are watching: ${root}`);
   console.log(`+ Your are output: ${output}`);
+
+  // not watch
+  if (!isWatch){
+    await cleanAndBuild();
+    return;
+  }
 
   // watch change
   chokidar.watch(root).on('all', () => { onChange() });
