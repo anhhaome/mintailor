@@ -4,9 +4,9 @@
   "description": "A Tailwind CSS Components",
   "main": "index.js",
   "scripts": {
-    "watch-css": "npx tailwindcss -i ./src/main.css -o ./dist/output.css --watch",
+    "watch-css": "npx tailwindcss -i ./src/assets/css/main.css -o ./dist/assets/css/output.css --watch",
     "build": "node scripts/build.js ./src ./dist && npx tailwindcss -i ./src/main.css -o ./dist/output.css",
-    "live": "live-server ./dist --no-browser --no-css-inject --wait=500",
+    "live": "live-server ./dist --no-browser --no-css-inject --wait=1500",
     "dev": "MINTAILOR_WATCH=1 npm run build & npm run live & npm run watch-css",
     "deploy": "push-dir --dir=dist --branch=gh-pages --cleanup"
   },
@@ -25,6 +25,7 @@
     "chai": "^4.3.4",
     "chokidar": "^3.5.3",
     "eta": "^1.12.3",
+    "fs-extra": "^10.0.1",
     "koa": "^2.13.4",
     "live-server": "^1.2.1",
     "mocha": "^9.1.3",

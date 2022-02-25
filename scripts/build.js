@@ -14,7 +14,7 @@ const cleanOutput = () => {
   if (fs.existsSync(output)){
     const ls = fs.readdirSync(output);
     for (let name of ls){
-      fs.rmSync(path.join(output, name));
+      fs.rmSync(path.join(output, name), { recursive: true });
     }
   } else {
     fs.mkdirSync(output);
@@ -37,6 +37,22 @@ const render = async (storage, view, state) => {
   return eta.renderFileAsync(view, state, config);
 }
 
+const copySync = (src, dst) => {
+  const stat = fs.statSync(src);
+  if (stat.isFile()){
+    fs.copyFileSync(src, dst);
+    return;
+  }
+
+  if (!fs.existsSync(dst))
+    fs.mkdirSync(dst);
+
+  let ls = fs.readdirSync(src);
+  for (let name of ls){
+    copySync(path.join(src, name), path.join(dst, name));
+  }
+}
+
 const buildSource = async () => {
   const ls = fs.readdirSync(root);
 
@@ -54,7 +70,7 @@ const buildSource = async () => {
       continue;
     }
 
-    fs.copyFileSync(src, dst);
+    copySync(src, dst);
   }
 }
 

@@ -1,11 +1,16 @@
-const plugin = require('tailwindcss/plugin')
+const plugin = require('tailwindcss/plugin');
+const colors = require('tailwindcss/colors');
 
 module.exports = {
   darkMode: 'class',
   content: ["./dist/**/*.{html,js}"],
   theme: {
     fontFamily: {
-      'sans': ['Nunito'],
+      'sans': ['PoppinsVN', 'serif'],
+    },
+    colors: {
+      primary: colors.sky,
+      ...colors
     },
     extend: {},
   },
