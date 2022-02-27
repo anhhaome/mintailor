@@ -1,66 +1,30 @@
+        </main>
+        <!-- CONTENT CLOSED -->
+      </div>
+      <!-- MAIN CONTENT CLOSED -->
     </div>
-    <!-- END CONTENT -->
+    <!-- WRAPPER CLOSED -->
   </div>
-  <!-- END MAIN -->
+  <!-- LAYOUT CLOSED -->
 
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-  <script src="prism.js"></script>
+  <script src="assets/js/prism.js"></script>
 
   <script>
-    function toBoolean(v){
-      if (typeof v === 'string')
-        return v === 'true';
-
-      return !!v;
-    }
-
-    function autoTheme(){
-      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        document.documentElement.classList.add('dark');
-        themeSelector.checked = true;
-      } else {
-        document.documentElement.classList.remove('dark');
-        themeSelector.checked = false;
-      }
-
-      if ((toBoolean(localStorage.fullnav) && !navExpand.checked) || (!toBoolean(localStorage.fullnav) && navExpand.checked)){
-        navExpand.click();
-      }
-    }
-
-    function toggleMode(mode){
-      localStorage.theme = mode;
-
-      autoTheme();
-    }
-
-    const themeSelector = document.getElementById('m-theme-selector');
-    themeSelector.addEventListener('change', e => {
-      toggleMode(e.target.checked ? 'dark' : 'light');
-    });
-
-    const navPanel = document.getElementById('m-nav-panel');
-    const navExpand = document.getElementById('m-nav-expand');
-    navExpand.addEventListener('change', e => {
+    // sidebar
+    const mLeftSideBar = document.getElementById('m-left-sidebar');
+    const mMainContent = document.getElementById('m-main-content');
+    const mControlLeftSidebar = document.getElementById('m-control-left-sidebar');
+    mControlLeftSidebar.addEventListener('change', e => {
       if (e.target.checked){
-        navPanel.setAttribute('active', true);
-        localStorage.fullnav = true;
+        mLeftSideBar.setAttribute('active', true);
+        mMainContent.setAttribute('active', true);
       } else {
-        navPanel.removeAttribute('active');
-        localStorage.fullnav = false;
+        mLeftSideBar.removeAttribute('active');
+        mMainContent.removeAttribute('active');
       }
-
-      autoTheme();
     });
-
-    window.addEventListener('load', () => {
-      if (window.innerWidth < 768 && !toBoolean(localStorage.fullnav)){
-        navExpand.click();
-      }
-    })
-
-    autoTheme();
 
     // highlight code
     const blocks = document.querySelectorAll('.codeblock');
@@ -95,6 +59,48 @@
       block.innerHTML = preview.outerHTML;
       block.appendChild(code);
     }
+
+    // theme
+    function toBoolean(v){
+      if (typeof v === 'string')
+        return v === 'true';
+
+      return !!v;
+    }
+
+    function autoTheme(){
+      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+        themeSelector.checked = true;
+      } else {
+        document.documentElement.classList.remove('dark');
+        themeSelector.checked = false;
+      }
+    }
+
+    function toggleMode(mode){
+      localStorage.theme = mode;
+
+      autoTheme();
+    }
+
+    const themeSelector = document.getElementById('m-theme-selector');
+    themeSelector.addEventListener('change', e => {
+      toggleMode(e.target.checked ? 'dark' : 'light');
+    });
+
+    autoTheme();
+
+    // loader
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('m-loader').classList.add('opacity-0');
+
+        setTimeout(() => {
+          document.getElementById('m-loader').classList.add('hidden');
+        }, 500);
+      }, 500);
+    });
   </script>
 </body>
 </html>

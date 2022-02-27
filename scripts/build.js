@@ -44,8 +44,9 @@ const copySync = (src, dst) => {
     return;
   }
 
-  if (!fs.existsSync(dst))
-    fs.mkdirSync(dst);
+  if (!fs.existsSync(dst)){
+    try { fs.mkdirSync(dst); } catch(err){ /* pass */ };
+  }
 
   let ls = fs.readdirSync(src);
   for (let name of ls){

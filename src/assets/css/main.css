@@ -13,6 +13,33 @@
   .codeblock .code {
     @apply bg-stone-800 rounded-lg px-4 py-2 overflow-x-auto text-white mt-4 text-sm dark:bg-black;
   }
+
+  /* scroll */
+  .myscroll::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+    border-radius: 2.5px;
+  }
+
+  .myscroll::-webkit-scrollbar-track {
+    background: transparent; 
+    border-radius: 2.5px;
+  }
+  
+  .myscroll::-webkit-scrollbar-thumb {
+    @apply bg-gray-500;
+    border-radius: 2.5px;
+  }
+
+  .myscroll::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-500;
+  }
+
+  .transition-size {
+    transition-property: width height;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+  }
 }
 
 /* font */
@@ -35,37 +62,4 @@
   font-family: PoppinsVN;
   font-weight: 700;
   src: url(../fonts/PoppinsVN-700.woff2) format("woff2"), url(../fonts/PoppinsVN-700.woff) format("woff"), url(../fonts/PoppinsVN-700.ttf) format("truetype")
-}
-
-/* @font-face {
-  font-family: MyPoppins;
-  src: url(../fonts/Poppins-Light.otf);
-  font-weight: 300;
-}
-
-@font-face {
-  font-family: MyPoppins;
-  src: url(../fonts/Poppins-Bold.otf);
-  font-weight: 700;
-} */
-
-/* scroll */
-::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
-  border-radius: 2.5px;
-}
-
-::-webkit-scrollbar-track {
-  background: #f1f1f1; 
-  border-radius: 2.5px;
-}
- 
-::-webkit-scrollbar-thumb {
-  background: #888; 
-  border-radius: 2.5px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #555; 
 }

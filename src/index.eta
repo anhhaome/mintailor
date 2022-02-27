@@ -1,6 +1,7 @@
 <%~ await includeFile('.parts/header.eta', { page: { active: 'Introduction' } }) %>
-<h1 class="mt-4 text-3xl">
-  <%~ await includeFile('.components/logo.eta', { noicon: true }) %>
+<h1 class="mt-4 text-3xl flex items-center">
+  <img class="h-10" src="assets/images/logo-only.svg" alt="Mintailor Logo Only">
+  <img class="h-10 ml-4 dark:invert" src="assets/images/text-only.svg" alt="Mintailor Text Only">
 </h1>
-<p class="mt-2 italic">A Minimal Tailwind CSS Components</p>
+<p class="mt-2">A Minimal Tailwind CSS Components</p>
 <%~ await includeFile('.parts/footer.eta') %>
