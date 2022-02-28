@@ -1,16 +1,14 @@
 const path = require('path');
 const fs = require('fs');
-const eta = require('eta');
 const chokidar = require('chokidar');
-
-const TIMEOUT = 1000;
+const ejs = require('ejs');
 
 const root = path.join(process.cwd(), process.argv[2]);
 const output = path.join(process.cwd(), process.argv[3]);
 
-const isWatch = !!process.env['MINTAILOR_WATCH'];
-
 const cleanOutput = () => {
+  console.log(`[Mintailor] Clean output`);
+
   if (fs.existsSync(output)){
     const ls = fs.readdirSync(output);
     for (let name of ls){
@@ -21,98 +19,181 @@ const cleanOutput = () => {
   }
 }
 
-const render = async (storage, view, state) => {
-  const absolutePath = path.join(storage, view);
-  if (absolutePath.indexOf(storage) !== 0)
-    throw new Error('cannot include view outside storage');
+ejs._resolveInclude = ejs.resolveInclude;
 
-  const config = {
-    root: storage,
-    views: storage,
-    includeFile(path, data){
-      return render(storage, path, data);
-    }
-  };
+const dependencies = [];
 
-  return eta.renderFileAsync(view, state, config);
+const findNode = (p, ls = dependencies) => {
+  for (let node of ls){
+    if (node.path === p)
+      return node;
+
+    let tryNode = findNode(p, node.children);
+    if (tryNode)
+      return tryNode;
+  }
+
+  return null;
 }
 
-const copySync = (src, dst) => {
-  const stat = fs.statSync(src);
-  if (stat.isFile()){
-    fs.copyFileSync(src, dst);
+const isHidden = p => {
+  const ua = path.parse(p);
+  if (ua.name === '')
+    return false;
+
+  if (ua.name[0] === '.')
+    return true;
+
+  return isHidden(ua.dir);
+}
+
+const doAddDirActon = p => {
+  if (isHidden(p))
+    return;
+
+  if (fs.existsSync(p))
+    return;
+
+  fs.mkdirSync(p);
+}
+
+const showDependencies = (ls = dependencies, tab = '') => {
+  if (ls === dependencies)
+    console.log(`[Mintailor] Dependencies: \n`);
+
+  for (let node of ls){
+    console.log(`|${tab} ${path.parse(node.path).base}${node.output ? ' -> ' + path.parse(node.output).base : ''}`);
+    showDependencies(node.children, `${tab}--`);
+  }
+
+  if (ls === dependencies)
+    console.log('');
+}
+
+const doContentAction = async (src, dst) => {
+  const ua = path.parse(src);
+
+  if (ua.ext === '.ejs'){
+    let node = findNode(src);
+
+    if (node){
+      for (let child of node.children){
+        await doContentAction(child.path, child.output);
+      }
+    }
+
+    if (isHidden(src) || !dst)
+      return;
+
+    const udst = path.parse(dst);
+    dst = path.join(udst.dir, `${udst.name}.html`);
+
+    if (node){
+      node.output = dst;
+    } else {
+      node = { path: src, children: [], output: dst };
+      dependencies.push(node);
+    }
+
+    /**
+     * @todo Remove include in ejs.
+     */
+    ejs.resolveInclude = function(name, filename, isDir) {
+      const includedPath = path.resolve(isDir ? filename : path.dirname(filename), name);
+      let parentNode = findNode(includedPath);
+      if (!parentNode){
+        parentNode = { path: includedPath, children: [] };
+        dependencies.push(parentNode);
+      }
+
+      if (parentNode.children.indexOf(node) === -1){
+        parentNode.children.push(node);
+      }
+
+      return ejs._resolveInclude(name, filename, isDir);
+    };
+
+
+    /**
+     * @todo Render error.
+     */
+    const content = await ejs.renderFile(src, {}, { async: true });
+
+    fs.writeFileSync(dst, content);
+    console.log(`[Mintailor] Rendered: ${dst}`);
+
+    showDependencies();
+    
     return;
   }
 
-  if (!fs.existsSync(dst)){
-    try { fs.mkdirSync(dst); } catch(err){ /* pass */ };
-  }
+  if (isHidden(src))
+    return;
 
-  let ls = fs.readdirSync(src);
-  for (let name of ls){
-    copySync(path.join(src, name), path.join(dst, name));
-  }
+  fs.copyFileSync(src, dst);
 }
 
-const buildSource = async () => {
-  const ls = fs.readdirSync(root);
+const doUnlinkDir = p => {
+  /**
+   * @todo Remove directory that contain ejs.
+   */
 
-  for (let name of ls){
-    let ua = path.parse(name);
-    let src = path.join(root, name);
-    let dst = path.join(output, name);
+  fs.rmdirSync(p, { recursive: true });
+};
 
-    if (ua.name[0] === '.') // skip hidden file
-      continue;
+const doUnlink = dst => {
+  /**
+   * @todo Remove ejs.
+   */
 
-    if (ua.ext === '.eta'){
-      let body = await render(root, ua.name, {});
-      fs.writeFileSync(path.join(output, `${ua.name}.html`), body);
-      continue;
-    }
-
-    copySync(src, dst);
+  if (fs.existsSync(dst)){
+    fs.rmSync(dst);
   }
 }
 
-const cleanAndBuild = async () => {
-  console.log(`+ Clean`)
-  cleanOutput();
+const onChange = (action, absolutePath) => {
 
-  console.log(`+ Build`)
-  await buildSource();
-}
+  const relativePath = path.relative(root, absolutePath);
+  const dst = path.join(output, relativePath);
 
-let loop = null;
+  switch(action){
+    // dir actions
+    case 'addDir':
+      doAddDirActon(dst);
+      break;
 
-const updateChange = async () => {
-  console.log('+ Changed. Rebuild.');
+    case 'unlinkDir':
+      doUnlinkDir(dst);
+      break
 
-  await cleanAndBuild();
-}
+    // file actions
+    case 'add':
+    case 'change':
+      doContentAction(absolutePath, dst);
+      break;
 
-const onChange = () => {
-  if (loop)
-    clearTimeout(loop);
+    case 'unlink':
+      doUnlink(dst);
+      break;
 
-  loop = setTimeout(updateChange, TIMEOUT);
+    default:
+      console.log(`[Mintailor] New action: `, action, absolutePath);
+  }
+
+  return;
 }
 
 ;(async () => {
   if (!fs.existsSync(root)){
-    console.error('Root not found');
+    console.error('[Mintailor] Root not found');
     return;
   }
 
-  console.log(`+ Your are watching: ${root}`);
-  console.log(`+ Your are output: ${output}`);
+  console.log(`[Mintailor] Your are watching: ${root}`);
+  console.log(`[Mintailor] Your are output: ${output}`);
 
-  // not watch
-  if (!isWatch){
-    await cleanAndBuild();
-    return;
-  }
+  cleanOutput();
 
   // watch change
-  chokidar.watch(root).on('all', () => { onChange() });
+  chokidar.watch(root).on('all', onChange);
 })();
