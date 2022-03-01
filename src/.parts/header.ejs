@@ -111,9 +111,9 @@ _%>
               dark:mactive:bg-gray-900
               dark:hover:bg-gray-900"  
                 href="<%= item.link %>"
-                <%= item.name === it.page.active ? 'active' : '' %>
+                <%= item.name === page.active ? 'active' : '' %>
               >
-                <ion-icon class="block text-xl px-3" name="<%= item.icon %><%= item.name === it.page.active ? '' : '-outline' %>"></ion-icon>
+                <ion-icon class="block text-xl px-3" name="<%= item.icon %><%= item.name === page.active ? '' : '-outline' %>"></ion-icon>
                 <span class="block group-mactive:hidden"><%= item.name %></span>
               </a>
             <% } %>

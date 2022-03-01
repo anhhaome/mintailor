@@ -1,4 +1,4 @@
-<%~ await includeFile('.parts/header.eta', { page: { active: 'Button' } }) %>
+<%- await include('.parts/header.ejs', { page: { active: 'Button' } }) %>
 <h1 class="mt-4 text-3xl font-bold">Button</h1>
 
 <h2 class="mt-6 text-xl font-bold mb-2">Simple</h2>
@@ -60,4 +60,4 @@
   ></label>
   <label class="inline-block ml-4" for="toggle-03">Larger</label>
 </div>
-<%~ await includeFile('.parts/footer.eta') %>
+<%- await include('.parts/footer.ejs') %>

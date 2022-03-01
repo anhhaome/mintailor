@@ -1,4 +1,4 @@
-<%~ await includeFile('.parts/header.eta', { page: { active: 'Alert' } }) %>
+<%- await include('.parts/header.ejs', { page: { active: 'Alert' } }) %>
 <h1 class="mt-4 text-3xl font-bold">Alert</h1>
 
 <div class="codeblock">
@@ -19,4 +19,4 @@
     Warning alert!
   </div>
 </div>
-<%~ await includeFile('.parts/footer.eta') %>
+<%- await include('.parts/footer.ejs') %>

@@ -1,4 +1,4 @@
-<%~ await includeFile('.parts/header.eta', { page: { active: 'Dropdown' } }) %>
+<%- await include('.parts/header.ejs', { page: { active: 'Dropdown' } }) %>
 <h1 class="mt-4 text-3xl font-bold">Dropdown</h1>
 
 <div class="codeblock">
@@ -15,4 +15,4 @@
     <li class="py-2 px-4">Download</li>
   </ul>
 </div>
-<%~ await includeFile('.parts/footer.eta') %>
+<%- await include('.parts/footer.ejs') %>
