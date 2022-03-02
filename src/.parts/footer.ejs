@@ -34,7 +34,7 @@
       preview.innerHTML = block.innerHTML;
 
       let code = document.createElement('pre');
-      code.className = 'code';
+      code.className = 'code myscroll';
 
       let raw = preview.innerHTML.replace(/^\s+$/gm, '').trim();
       let minTab = Math.min.apply(null, raw.split('\n').filter(i => i).slice(1).map(row => {

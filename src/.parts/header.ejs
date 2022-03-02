@@ -20,7 +20,7 @@ _%>
 
   <title>Mintailor - A Tailwind Components Library</title>
 
-  <link href="assets/css/output.css" rel="stylesheet">
+  <link href="assets/css/output.css?v=0.1.0" rel="stylesheet">
 
   <link rel="stylesheet" href="assets/css/prism.css">
 </head>
@@ -38,6 +38,8 @@ _%>
 
     <!-- RIGHT SIDEBAR -->
     <input type="checkbox" class="hidden peer" id="m-control-right-sidebar">
+    <label for="m-control-right-sidebar" class="fixed top-0 left-0 w-screen h-screen z-30 hidden
+      peer-checked:block"></label>
     <div class="fixed h-screen w-64 top-0 right-[-16rem] shadow transition-size z-30 bg-white
       peer-checked:right-0
       dark:bg-[#1d2432] dark:border-[#292f3d] dark:border-l">
@@ -78,31 +80,38 @@ _%>
     <!-- WRAPPER -->
     <div>
       <!-- LEFT SIDEBAR -->
-      <input type="checkbox" class="hidden" id="m-control-left-sidebar">
+      <input type="checkbox" class="hidden peer" id="m-control-left-sidebar">
+      <label for="m-control-left-sidebar" class="fixed top-0 left-0 w-screen h-screen z-30 bg-white bg-opacity-80 hidden
+      peer-checked:block
+      md:hidden md:peer-checked:hidden
+      dark:bg-black dark:bg-opacity-80"></label>
       <div 
         id="m-left-sidebar"
-        class="z-30 bg-white border-r fixed left-0 top-0 w-64 h-screen transition-size group
-        mactive:w-16
+        class="z-30 bg-white border-r fixed left-[-16rem] top-0 w-64 h-screen transition-size group
+        mactive:left-0
+        md:left-0
+        md:mactive:w-16
         dark:bg-[#1d2432] dark:border-[#292f3d]"
       >
         <header class="h-16 w-full px-4 flex items-center border-b
           dark:border-[#292f3d]">
           <img class="w-7 h-7" src="assets/images/logo-only.svg" alt="Mintailor Logo Only">
           <img class="ml-4 w-auto h-6
-            group-mactive:hidden
+            md:group-mactive:hidden
             dark:invert" 
             src="assets/images/text-only.svg" alt="Mintailor Text Only">
         </header>
 
-        <nav class="h-[calc(100vh-4rem)] w-full p-2 overflow-hidden myscroll
+        <nav class="h-[calc(100vh-4rem)] w-full px-2 overflow-hidden myscroll
           hover:overflow-y-auto">
           <% for (let item of navigation){ %>
             <% if (item.type === 'label') { %>
-              <h5 class="px-3 h-10 flex items-center text-xs uppercase tracking-wider relative
+              <h5 class="px-3 h-10 flex items-center text-xs uppercase tracking-wider relative my-2
               after:hidden after:h-[1px] after:w-full after:bg-gray-200 after:absolute after:top-1/2 after:left-0
-              group-mactive:first:hidden group-mactive:after:block
+              md:group-mactive:first:hidden md:group-mactive:after:block md:group-mactive:h-0
+
               dark:after:bg-[#292f3d]">
-                <span class="group-mactive:hidden"><%= item.name %></span>
+                <span class="md:group-mactive:hidden"><%= item.name %></span>
               </h5>
             <% } else { %>
               <a class="flex items-center my-2 h-10 rounded
@@ -114,7 +123,8 @@ _%>
                 <%= item.name === page.active ? 'active' : '' %>
               >
                 <ion-icon class="block text-xl px-3" name="<%= item.icon %><%= item.name === page.active ? '' : '-outline' %>"></ion-icon>
-                <span class="block group-mactive:hidden"><%= item.name %></span>
+                <span class="block 
+                  md:group-mactive:hidden"><%= item.name %></span>
               </a>
             <% } %>
           <% } %>
@@ -125,18 +135,27 @@ _%>
       <!-- MAIN CONTENT -->
       <div
         id="m-main-content"
-        class="bg-gray-50 group ml-auto w-[calc(100%-16rem)] transition-size
-        mactive:w-[calc(100%-4rem)]
+        class="bg-gray-50 group ml-auto transition-size w-full
+        md:w-[calc(100%-16rem)]
+        md:mactive:w-[calc(100%-4rem)]
         dark:bg-gray-900"
       >
         <!-- TOPBAR -->
-        <header class="fixed top-0 right-0 h-16 bg-white border-b border-gray-100 w-[calc(100%-16rem)] z-20 flex items-center justify-start transition-size
-        group-mactive:w-[calc(100%-4rem)]
+        <header class="fixed top-0 right-0 h-16 bg-white border-b border-gray-100 z-20 flex items-center justify-between transition-size w-full
+        md:w-[calc(100%-16rem)]
+        md:group-mactive:w-[calc(100%-4rem)]
         dark:bg-[#1d2432] dark:border-[#292f3d]">
           <label for="m-control-left-sidebar" class="px-2 mx-4 flex items-center cursor-pointer">
-            <ion-icon class="text-[1.4rem]" name="menu-outline"></ion-icon>
+            <ion-icon class="text-xl scale-[1.1]" name="menu-outline"></ion-icon>
           </label>
-          <span class="ml-auto"></span>
+          <div class="h-16 px-4 flex items-center
+            md:hidden">
+            <img class="w-7 h-7" src="assets/images/logo-only.svg" alt="Mintailor Logo Only">
+            <img class="ml-4 w-auto h-6
+              md:group-mactive:hidden
+              dark:invert" 
+              src="assets/images/text-only.svg" alt="Mintailor Text Only">
+          </div>
           <label for="m-control-right-sidebar" class="px-2 mx-4 flex items-center cursor-pointer">
             <ion-icon class="text-xl" name="settings-outline"></ion-icon>
           </label>
