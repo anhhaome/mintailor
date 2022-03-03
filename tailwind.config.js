@@ -7,6 +7,11 @@ module.exports = {
   theme: {
     colors: {
       primary: colors.cyan,
+      secondary: colors.stone,
+      danger: colors.rose,
+      info: colors.indigo,
+      warn: colors.amber,
+      success: colors.emerald,
       ...colors
     },
     fontFamily: {

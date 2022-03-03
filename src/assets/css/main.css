@@ -11,7 +11,7 @@
   }
 
   .codeblock .code {
-    @apply bg-stone-800 rounded-lg px-4 py-2 overflow-x-auto text-white mt-4 text-sm dark:bg-black;
+    @apply bg-stone-800 rounded px-4 py-2 overflow-x-auto text-white mt-4 text-sm dark:bg-black;
   }
 
   /* scroll */
@@ -39,6 +39,11 @@
     transition-property: width height;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 150ms;
+  }
+
+  /* icon */
+  ion-icon[name="home"], ion-icon[name="home-outline"] {
+    @apply mb-[0.2em];
   }
 }
 
