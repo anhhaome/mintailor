@@ -1,69 +1,27 @@
 <%- await include('.parts/header.ejs', { page: { active: 'Button' } }) %>
-<h1 class="mt-4 text-3xl font-bold">Button</h1>
+<h1 class="mt-4 text-3xl font-semibold">Button</h1>
 
-<h2 class="mt-6 text-xl font-bold mb-2">Simple</h2>
+<div class="p-4 rounded border bg-white border-gray-100 mt-4
+dark:bg-gray-900 dark:border-gray-800">
 
-<div class="codeblock">
-  <div class="mb-4">
-    <button class="px-4 py-2 rounded-lg inline-flex items-center text-white bg-primary-500">Primary</button>
-    <button class="px-4 py-2 rounded-lg inline-flex items-center text-white bg-secondary-500">Secondary</button>
+  <h2 class="text-xl mb-2">Simple</h2>
+
+  <div class="codeblock">
+    <div class="mb-4">
+      <button class="px-4 py-2 rounded-lg inline-flex items-center text-white bg-primary-500">Primary</button>
+      <button class="px-4 py-2 rounded-lg inline-flex items-center text-white bg-secondary-500">Secondary</button>
+    </div>
+
+    <div class="mb-4">
+      <button class="px-4 py-2 rounded-lg inline-flex items-center text-white bg-success-500">Success</button>
+      <button class="px-4 py-2 rounded-lg inline-flex items-center text-white bg-danger-500">Danger</button>
+    </div>
+
+    <div class="mb-4">
+      <button class="px-4 py-2 rounded-lg inline-flex items-center text-white bg-info-500">Info</button>
+      <button class="px-4 py-2 rounded-lg inline-flex items-center text-white bg-warn-500">Warning</button>
+    </div>
   </div>
 
-  <div class="mb-4">
-    <button class="px-4 py-2 rounded-lg inline-flex items-center text-white bg-success-500">Success</button>
-    <button class="px-4 py-2 rounded-lg inline-flex items-center text-white bg-danger-500">Danger</button>
-  </div>
-
-  <div class="mb-4">
-    <button class="px-4 py-2 rounded-lg inline-flex items-center text-white bg-info-500">Info</button>
-    <button class="px-4 py-2 rounded-lg inline-flex items-center text-white bg-warn-500">Warning</button>
-  </div>
-</div>
-
-<h2 class="mt-6 text-xl font-bold mb-2">Toggle</h2>
-
-<div class="codeblock">
-  <input class="hidden peer" id="toggle-01" type="checkbox">
-  <label 
-    class="inline-block bg-stone-200 rounded-full w-[2em] h-[1em] select-none align-middle
-      dark:bg-stone-700
-      before:block before:w-[0.9em] before:h-[0.9em] before:m-[0.05em] before:rounded-full before:bg-white before:shadow
-      dark:before:bg-black
-      before:transition-all
-      peer-checked:bg-black peer-checked:before:ml-[1.05em]
-      dark:peer-checked:bg-white"
-    for="toggle-01"
-  ></label>
-  <label class="inline-block ml-4" for="toggle-01">Normal</label>
-</div>
-
-<div class="codeblock text-lg">
-  <input class="hidden peer" id="toggle-02" type="checkbox">
-  <label 
-    class="inline-block bg-stone-200 rounded-full w-[2em] h-[1em] select-none align-middle
-      dark:bg-stone-700
-      before:block before:w-[0.9em] before:h-[0.9em] before:m-[0.05em] before:rounded-full before:bg-white before:shadow
-      dark:before:bg-black
-      before:transition-all
-      peer-checked:bg-black peer-checked:before:ml-[1.05em]
-      dark:peer-checked:bg-white"
-    for="toggle-02"
-  ></label>
-  <label class="inline-block ml-4" for="toggle-02">Large</label>
-</div>
-
-<div class="codeblock text-xl">
-  <input class="hidden peer" id="toggle-03" type="checkbox">
-  <label 
-    class="inline-block bg-stone-200 rounded-full w-[2em] h-[1em] select-none align-middle
-      dark:bg-stone-700
-      before:block before:w-[0.9em] before:h-[0.9em] before:m-[0.05em] before:rounded-full before:bg-white before:shadow
-      dark:before:bg-black
-      before:transition-all
-      peer-checked:bg-black peer-checked:before:ml-[1.05em]
-      dark:peer-checked:bg-white"
-    for="toggle-03"
-  ></label>
-  <label class="inline-block ml-4" for="toggle-03">Larger</label>
 </div>
 <%- await include('.parts/footer.ejs') %>

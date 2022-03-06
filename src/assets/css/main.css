@@ -4,7 +4,7 @@
 
 @layer components {
   .codeblock {
-    @apply relative my-4;
+    @apply relative;
   }
 
   .codeblock .preview {

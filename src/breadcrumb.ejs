@@ -1,36 +1,41 @@
 <%- await include('.parts/header.ejs', { page: { active: 'Breadcrumb' } }) %>
 <h1 class="mt-4 text-3xl font-semibold">Breadcrumb</h1>
 
-<div class="codeblock">
-  <div class="inline-flex items-center space-x-2">
-    <a 
-      href="#" 
-      class="text-sm inline-flex items-center
-      mactive:text-stone-400
-      dark:mactive:text-stone-500"
-    >
-      <ion-icon class="mr-2" name="home"></ion-icon>
-      <span>Home</span>
-    </a>
-    <a 
-      href="#" 
-      class="text-sm inline-flex items-center
-      mactive:text-stone-400
-      dark:mactive:text-stone-500"
-    >
-      <ion-icon class="mr-2" name="chevron-forward"></ion-icon>
-      <span>Mintailor</span>
-    </a>
-    <a 
-      href="#" 
-      class="text-sm inline-flex items-center
-      mactive:text-stone-400
-      dark:mactive:text-stone-500"
-      active
-    >
-      <ion-icon class="mr-2" name="chevron-forward"></ion-icon>
-      <span>Breadcrumb</span>
-    </a>
+<div class="p-4 rounded border bg-white border-gray-100 mt-4
+dark:bg-gray-900 dark:border-gray-800">
+
+  <div class="codeblock">
+    <div class="inline-flex items-center space-x-2">
+      <a 
+        href="#" 
+        class="text-sm inline-flex items-center
+        mactive:text-stone-400
+        dark:mactive:text-stone-500"
+      >
+        <ion-icon class="mr-2" name="home"></ion-icon>
+        <span>Home</span>
+      </a>
+      <a 
+        href="#" 
+        class="text-sm inline-flex items-center
+        mactive:text-stone-400
+        dark:mactive:text-stone-500"
+      >
+        <ion-icon class="mr-2" name="chevron-forward"></ion-icon>
+        <span>Mintailor</span>
+      </a>
+      <a 
+        href="#" 
+        class="text-sm inline-flex items-center
+        mactive:text-stone-400
+        dark:mactive:text-stone-500"
+        active
+      >
+        <ion-icon class="mr-2" name="chevron-forward"></ion-icon>
+        <span>Breadcrumb</span>
+      </a>
+    </div>
   </div>
+
 </div>
 <%- await include('.parts/footer.ejs') %>

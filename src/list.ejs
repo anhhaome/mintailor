@@ -1,12 +1,27 @@
 <%- await include('.parts/header.ejs', { page: { active: 'List' } }) %>
-<h1 class="mt-4 text-3xl font-bold">List</h1>
+<h1 class="mt-4 text-3xl font-semibold">List</h1>
 
-<div class="codeblock">
-  <ul class="w-48 rounded-lg border dark:border-stone-500">
-    <li class="py-2 px-4 border-b dark:border-stone-500">Profile</li>
-    <li class="py-2 px-4 border-b dark:border-stone-500">Settings</li>
-    <li class="py-2 px-4 border-b dark:border-stone-500">Messages</li>
-    <li class="py-2 px-4">Download</li>
-  </ul>
+<div class="p-4 rounded border bg-white border-gray-100 mt-4
+dark:bg-gray-900 dark:border-gray-800">
+
+  <div class="codeblock">
+    <ul class="w-48 rounded bg-white border
+    dark:bg-gray-800 dark:border-gray-700">
+      <li class="py-2 px-4 cursor-pointer rounded-t
+      hover:bg-gray-100
+      dark:hover:bg-gray-700">Profile</li>
+      <li class="py-2 px-4 cursor-pointer
+      hover:bg-gray-100
+      dark:hover:bg-gray-700">Settings</li>
+      <li class="py-2 px-4 cursor-pointer
+      hover:bg-gray-100
+      dark:hover:bg-gray-700">Messages</li>
+      <li class="py-2 px-4 cursor-pointer rounded-b
+      hover:bg-gray-100
+      dark:hover:bg-gray-700">Download</li>
+    </ul>
+  </div>
+
 </div>
+
 <%- await include('.parts/footer.ejs') %>
