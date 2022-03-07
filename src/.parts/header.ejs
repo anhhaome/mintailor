@@ -9,20 +9,17 @@
     { type: 'link', name: 'Dropdown', link: 'dropdown.html', icon: 'caret-down' },
     { type: 'link', name: 'List', link: 'list.html', icon: 'list' },
     { type: 'link', name: 'Input', link: 'input.html', icon: 'brush' },
+    { type: 'label', name: 'Pages' },
+    { type: 'link', name: 'Error', link: 'error-page.html', icon: 'bug' },
+    { type: 'link', name: 'Info', link: 'info-page.html', icon: 'information-circle' },
+    { type: 'link', name: 'Success', link: 'success-page.html', icon: 'shield-checkmark' },
+    { type: 'link', name: 'Warn', link: 'warn-page.html', icon: 'warning' },
   ];
 _%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Mintailor - A Tailwind Components Library</title>
-
-  <link href="assets/css/output.css?v=0.1.1" rel="stylesheet">
-
-  <link rel="stylesheet" href="assets/css/prism.css">
+  <%- await include('head.ejs') %>
 </head>
 <body>
   <!-- LAYOUT -->
