@@ -1,0 +1,76 @@
+<%- await include('.parts/header.ejs', { page: { active: 'Table' } }) %>
+<h1 class="mt-4 text-3xl font-semibold">Table</h1>
+
+<div class="p-4 rounded border bg-white border-gray-100 mt-4
+dark:bg-gray-900 dark:border-gray-800">
+  <div class="codeblock">
+
+    <table class="table-fixed w-full">
+      <thead class="bg-gray-50 dark:bg-gray-800 border-b
+      dark:border-gray-700">
+        <th class="py-2 px-4 font-normal text-xs text-left uppercase">
+          Name
+        </th>
+        <th class="py-2 px-4 font-normal text-xs text-left uppercase">
+          Color
+        </th>
+        <th class="py-2 px-4 font-normal text-xs text-left uppercase">
+          Category
+        </th>
+        <th class="py-2 px-4 font-normal text-xs text-left uppercase">
+          Price
+        </th>
+      </thead>
+      <tbody>
+        <tr class="border-b
+        dark:border-gray-700">
+          <td class="py-2 px-4">
+            Apple MacBook Pro 17"
+          </td>
+          <td class="py-2 px-4">
+            Sliver
+          </td>
+          <td class="py-2 px-4">
+            Laptop
+          </td>
+          <td class="py-2 px-4">
+            $2999
+          </td>
+        </tr>
+        <tr class="border-b
+        dark:border-gray-700">
+          <td class="py-2 px-4">
+            Apple Imac 27"
+          </td>
+          <td class="py-2 px-4">
+            White
+          </td>
+          <td class="py-2 px-4">
+            Desktop Pc
+          </td>
+          <td class="py-2 px-4">
+            $1999
+          </td>
+        </tr>
+        <tr class="border-b
+        dark:border-gray-700">
+          <td class="py-2 px-4">
+            Apple Magic Mouse 2
+          </td>
+          <td class="py-2 px-4">
+            White
+          </td>
+          <td class="py-2 px-4">
+            Accessories
+          </td>
+          <td class="py-2 px-4">
+            $99
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+
+<%- await include('.parts/footer.ejs') %>
