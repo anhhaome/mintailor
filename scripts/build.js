@@ -7,88 +7,79 @@ const root = path.join(process.cwd(), process.argv[2]);
 const output = path.join(process.cwd(), process.argv[3]);
 
 const cleanOutput = () => {
-  console.log(`[Mintailor] Clean output`);
+  console.log('[Mintailor] Clean output');
 
-  if (fs.existsSync(output)){
+  if (fs.existsSync(output)) {
     const ls = fs.readdirSync(output);
-    for (let name of ls){
+    for (const name of ls) {
       fs.rmSync(path.join(output, name), { recursive: true });
     }
   } else {
     fs.mkdirSync(output);
   }
-}
+};
 
 ejs._resolveInclude = ejs.resolveInclude;
 
 const dependencies = [];
 
 const findNode = (p, ls = dependencies) => {
-  for (let node of ls){
-    if (node.path === p)
-      return node;
+  for (const node of ls) {
+    if (node.path === p) { return node; }
 
-    let tryNode = findNode(p, node.children);
-    if (tryNode)
-      return tryNode;
+    const tryNode = findNode(p, node.children);
+    if (tryNode) { return tryNode; }
   }
 
   return null;
-}
+};
 
 const isHidden = p => {
   const ua = path.parse(p);
-  if (ua.name === '')
-    return false;
+  if (ua.name === '') { return false; }
 
-  if (ua.name[0] === '.')
-    return true;
+  if (ua.name[0] === '.') { return true; }
 
   return isHidden(ua.dir);
-}
+};
 
 const doAddDirActon = p => {
-  if (isHidden(p))
-    return;
+  if (isHidden(p)) { return; }
 
-  if (fs.existsSync(p))
-    return;
+  if (fs.existsSync(p)) { return; }
 
   fs.mkdirSync(p);
-}
+};
 
 const showDependencies = (ls = dependencies, tab = '') => {
-  if (ls === dependencies)
-    console.log(`[Mintailor] Dependencies: \n`);
+  if (ls === dependencies) { console.log('[Mintailor] Dependencies: \n'); }
 
-  for (let node of ls){
+  for (const node of ls) {
     console.log(`|${tab} ${path.parse(node.path).base}${node.output ? ' -> ' + path.parse(node.output).base : ''}`);
     showDependencies(node.children, `${tab}--`);
   }
 
-  if (ls === dependencies)
-    console.log('');
-}
+  if (ls === dependencies) { console.log(''); }
+};
 
 const doContentAction = async (src, dst) => {
   const ua = path.parse(src);
 
-  if (ua.ext === '.ejs'){
+  if (ua.ext === '.ejs') {
     let node = findNode(src);
 
-    if (node){
-      for (let child of node.children){
+    if (node) {
+      for (const child of node.children) {
         await doContentAction(child.path, child.output);
       }
     }
 
-    if (isHidden(src) || !dst)
-      return;
+    if (isHidden(src) || !dst) { return; }
 
     const udst = path.parse(dst);
     dst = path.join(udst.dir, `${udst.name}.html`);
 
-    if (node){
+    if (node) {
       node.output = dst;
     } else {
       node = { path: src, children: [], output: dst };
@@ -98,21 +89,20 @@ const doContentAction = async (src, dst) => {
     /**
      * @todo Remove include in ejs.
      */
-    ejs.resolveInclude = function(name, filename, isDir) {
+    ejs.resolveInclude = function (name, filename, isDir) {
       const includedPath = path.resolve(isDir ? filename : path.dirname(filename), name);
       let parentNode = findNode(includedPath);
-      if (!parentNode){
+      if (!parentNode) {
         parentNode = { path: includedPath, children: [] };
         dependencies.push(parentNode);
       }
 
-      if (parentNode.children.indexOf(node) === -1){
+      if (parentNode.children.indexOf(node) === -1) {
         parentNode.children.push(node);
       }
 
       return ejs._resolveInclude(name, filename, isDir);
     };
-
 
     /**
      * @todo Render error.
@@ -123,15 +113,14 @@ const doContentAction = async (src, dst) => {
     console.log(`[Mintailor] Rendered: ${dst}`);
 
     showDependencies();
-    
+
     return;
   }
 
-  if (isHidden(src))
-    return;
+  if (isHidden(src)) { return; }
 
   fs.copyFileSync(src, dst);
-}
+};
 
 const doUnlinkDir = p => {
   /**
@@ -146,17 +135,16 @@ const doUnlink = dst => {
    * @todo Remove ejs.
    */
 
-  if (fs.existsSync(dst)){
+  if (fs.existsSync(dst)) {
     fs.rmSync(dst);
   }
-}
+};
 
 const onChange = (action, absolutePath) => {
-
   const relativePath = path.relative(root, absolutePath);
   const dst = path.join(output, relativePath);
 
-  switch(action){
+  switch (action) {
     // dir actions
     case 'addDir':
       doAddDirActon(dst);
@@ -164,7 +152,7 @@ const onChange = (action, absolutePath) => {
 
     case 'unlinkDir':
       doUnlinkDir(dst);
-      break
+      break;
 
     // file actions
     case 'add':
@@ -177,14 +165,12 @@ const onChange = (action, absolutePath) => {
       break;
 
     default:
-      console.log(`[Mintailor] New action: `, action, absolutePath);
+      console.log('[Mintailor] New action: ', action, absolutePath);
   }
-
-  return;
 }
 
 ;(async () => {
-  if (!fs.existsSync(root)){
+  if (!fs.existsSync(root)) {
     console.error('[Mintailor] Root not found');
     return;
   }

@@ -1,0 +1,19 @@
+{
+  "env": {
+    "es2021": true,
+    "node": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "standard"
+  ],
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "ignorePatterns": ["dist/**/*.js", "src/assets/**/*.js"],
+  "rules": {
+    "semi": ["error", "always"],
+    "jsdoc/no-undefined-types": "off"
+  }
+}
