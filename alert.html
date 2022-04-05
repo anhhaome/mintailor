@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Mintailor - A Tailwind Components Library</title>
+
+<link href="assets/css/output.css?v=0.1.1" rel="stylesheet">
+
+<link rel="stylesheet" href="assets/css/prism.min.css">
+<link rel="stylesheet" href="assets/css/animate.min.css">
+</head>
+<body>
+  <!-- LAYOUT -->
+  <div class="antialiased font-sans text-sm dark:text-white">
+    <!-- LOADER -->
+    <div id="m-loader" class="fixed top-0 left-0 w-screen h-screen bg-white z-40 flex items-center justify-center transition-opacity dark:bg-gray-900">
+      <svg role="status" class="mr-2 w-16 h-16 text-gray-200 animate-spin fill-primary-500 dark:text-gray-800" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+        <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+      </svg>
+    </div>
+    <!-- LOADER CLOSED -->
+
+    <!-- RIGHT SIDEBAR -->
+    <input type="checkbox" class="hidden peer" id="m-control-right-sidebar">
+    <label for="m-control-right-sidebar" class="fixed top-0 left-0 w-screen h-screen z-30 hidden
+      peer-checked:block"></label>
+    <div class="fixed h-screen w-64 top-0 right-[-16rem] shadow transition-size z-30 bg-white
+      peer-checked:right-0
+      dark:bg-[#1d2432] dark:border-[#292f3d] dark:border-l">
+      <header class="bg-primary-500 text-white h-16 w-full px-4 flex justify-between items-center">
+        <div class="uppercase font-semibold tracking-wider">Settings</div>
+        <label for="m-control-right-sidebar" class="cursor-pointer">
+          <ion-icon class="text-2xl" name="close"></ion-icon>
+        </label>
+      </header>
+
+      <main>
+        <h5 class="px-3 h-10 flex items-center text-xs uppercase tracking-wider">Theme</h5>
+        <div class="flex items-center justify-center">
+          <div class="uppercase text-stone-500 pt-1 px-2 text-sm">
+            Light
+          </div>
+          <div class="text-xl">
+            <input class="hidden peer" id="m-theme-selector" type="checkbox">
+            <label 
+              class="inline-block bg-stone-200 rounded-full w-[2em] h-[1em] select-none align-middle
+                dark:bg-stone-700
+                before:block before:w-[0.9em] before:h-[0.9em] before:m-[0.05em] before:rounded-full before:bg-white before:shadow
+                dark:before:bg-black
+                before:transition-size
+                peer-checked:bg-black peer-checked:before:ml-[1.05em]
+                dark:peer-checked:bg-white"
+              for="m-theme-selector"
+            ></label>
+          </div>
+          <div class="uppercase text-stone-500 pt-1 px-2 text-sm">
+            Dark
+          </div>
+        </div>
+      </main>
+    </div>
+    <!-- RIGHT SIDEBAR CLOSED -->
+
+    <!-- WRAPPER -->
+    <div>
+      <!-- LEFT SIDEBAR -->
+      <input type="checkbox" class="hidden peer" id="m-control-left-sidebar">
+      <label for="m-control-left-sidebar" class="fixed top-0 left-0 w-screen h-screen z-30 bg-white bg-opacity-80 hidden
+      peer-checked:block
+      md:hidden md:peer-checked:hidden
+      dark:bg-black dark:bg-opacity-80"></label>
+      <div 
+        id="m-left-sidebar"
+        class="z-30 bg-white border-r fixed left-[-16rem] top-0 w-64 h-screen transition-size group
+        mactive:left-0
+        md:left-0
+        md:mactive:w-16
+        dark:bg-[#1d2432] dark:border-[#292f3d]"
+      >
+        <header class="h-16 w-full px-4 flex items-center border-b justify-center
+          dark:border-[#292f3d]">
+          <img class="w-7 h-7" src="assets/images/logo-only.svg" alt="Mintailor Logo Only">
+          <img class="ml-4 w-auto h-6
+            md:group-mactive:hidden
+            dark:invert" 
+            src="assets/images/text-only.svg" alt="Mintailor Text Only">
+        </header>
+
+        <nav class="h-[calc(100vh-4rem)] w-full px-2 overflow-hidden myscroll
+          hover:overflow-y-auto">
+          
+            
+              <h5 class="px-3 h-10 flex items-center text-xs uppercase tracking-wider relative my-2
+              after:hidden after:h-[1px] after:w-full after:bg-gray-200 after:absolute after:top-1/2 after:left-0
+              md:group-mactive:first:hidden md:group-mactive:after:block md:group-mactive:h-0
+
+              dark:after:bg-[#292f3d]">
+                <span class="md:group-mactive:hidden">Overview</span>
+              </h5>
+            
+          
+            
+              <a class="flex items-center my-2 h-10 rounded
+              mactive:bg-primary-500 mactive:text-white
+              hover:bg-gray-100
+              dark:hover:bg-gray-900"  
+                href="index.html"
+                
+              >
+                <ion-icon class="block text-xl px-3" name="home-outline"></ion-icon>
+                <span class="block 
+                  md:group-mactive:hidden">Introduction</span>
+              </a>
+            
+          
+            
+              <h5 class="px-3 h-10 flex items-center text-xs uppercase tracking-wider relative my-2
+              after:hidden after:h-[1px] after:w-full after:bg-gray-200 after:absolute after:top-1/2 after:left-0
+              md:group-mactive:first:hidden md:group-mactive:after:block md:group-mactive:h-0
+
+              dark:after:bg-[#292f3d]">
+                <span class="md:group-mactive:hidden">Components</span>
+              </h5>
+            
+          
+            
+              <a class="flex items-center my-2 h-10 rounded
+              mactive:bg-primary-500 mactive:text-white
+              hover:bg-gray-100
+              dark:hover:bg-gray-900"  
+                href="alert.html"
+                active
+              >
+                <ion-icon class="block text-xl px-3" name="alert-circle"></ion-icon>
+                <span class="block 
+                  md:group-mactive:hidden">Alert</span>
+              </a>
+            
+          
+            
+              <a class="flex items-center my-2 h-10 rounded
+              mactive:bg-primary-500 mactive:text-white
+              hover:bg-gray-100
+              dark:hover:bg-gray-900"  
+                href="breadcrumb.html"
+                
+              >
+                <ion-icon class="block text-xl px-3" name="link-outline"></ion-icon>
+                <span class="block 
+                  md:group-mactive:hidden">Breadcrumb</span>
+              </a>
+            
+          
+            
+              <a class="flex items-center my-2 h-10 rounded
+              mactive:bg-primary-500 mactive:text-white
+              hover:bg-gray-100
+              dark:hover:bg-gray-900"  
+                href="button.html"
+                
+              >
+                <ion-icon class="block text-xl px-3" name="play-circle-outline"></ion-icon>
+                <span class="block 
+                  md:group-mactive:hidden">Button</span>
+              </a>
+            
+          
+            
+              <a class="flex items-center my-2 h-10 rounded
+              mactive:bg-primary-500 mactive:text-white
+              hover:bg-gray-100
+              dark:hover:bg-gray-900"  
+                href="checkbox.html"
+                
+              >
+                <ion-icon class="block text-xl px-3" name="checkbox-outline"></ion-icon>
+                <span class="block 
+                  md:group-mactive:hidden">Checkbox</span>
+              </a>
+            
+          
+            
+              <a class="flex items-center my-2 h-10 rounded
+              mactive:bg-primary-500 mactive:text-white
+              hover:bg-gray-100
+              dark:hover:bg-gray-900"  
+                href="dialog.html"
+                
+              >
+                <ion-icon class="block text-xl px-3" name="browsers-outline"></ion-icon>
+                <span class="block 
+                  md:group-mactive:hidden">Dialog</span>
+              </a>
+            
+          
+            
+              <a class="flex items-center my-2 h-10 rounded
+              mactive:bg-primary-500 mactive:text-white
+              hover:bg-gray-100
+              dark:hover:bg-gray-900"  
+                href="dropdown.html"
+                
+              >
+                <ion-icon class="block text-xl px-3" name="caret-down-outline"></ion-icon>
+                <span class="block 
+                  md:group-mactive:hidden">Dropdown</span>
+              </a>
+            
+          
+            
+              <a class="flex items-center my-2 h-10 rounded
+              mactive:bg-primary-500 mactive:text-white
+              hover:bg-gray-100
+              dark:hover:bg-gray-900"  
+                href="list.html"
+                
+              >
+                <ion-icon class="block text-xl px-3" name="list-outline"></ion-icon>
+                <span class="block 
+                  md:group-mactive:hidden">List</span>
+              </a>
+            
+          
+            
+              <a class="flex items-center my-2 h-10 rounded
+              mactive:bg-primary-500 mactive:text-white
+              hover:bg-gray-100
+              dark:hover:bg-gray-900"  
+                href="loader.html"
+                
+              >
+                <ion-icon class="block text-xl px-3" name="reload-outline"></ion-icon>
+                <span class="block 
+                  md:group-mactive:hidden">Loader</span>
+              </a>
+            
+          
+            
+              <a class="flex items-center my-2 h-10 rounded
+              mactive:bg-primary-500 mactive:text-white
+              hover:bg-gray-100
+              dark:hover:bg-gray-900"  
+                href="notification.html"
+                
+              >
+                <ion-icon class="block text-xl px-3" name="notifications-outline"></ion-icon>
+                <span class="block 
+                  md:group-mactive:hidden">Notification</span>
+              </a>
+            
+          
+            
+              <a class="flex items-center my-2 h-10 rounded
+              mactive:bg-primary-500 mactive:text-white
+              hover:bg-gray-100
+              dark:hover:bg-gray-900"  
+                href="input.html"
+                
+              >
+                <ion-icon class="block text-xl px-3" name="brush-outline"></ion-icon>
+                <span class="block 
+                  md:group-mactive:hidden">Input</span>
+              </a>
+            
+          
+            
+              <a class="flex items-center my-2 h-10 rounded
+              mactive:bg-primary-500 mactive:text-white
+              hover:bg-gray-100
+              dark:hover:bg-gray-900"  
+                href="table.html"
+                
+              >
+                <ion-icon class="block text-xl px-3" name="server-outline"></ion-icon>
+                <span class="block 
+                  md:group-mactive:hidden">Table</span>
+              </a>
+            
+          
+            
+              <h5 class="px-3 h-10 flex items-center text-xs uppercase tracking-wider relative my-2
+              after:hidden after:h-[1px] after:w-full after:bg-gray-200 after:absolute after:top-1/2 after:left-0
+              md:group-mactive:first:hidden md:group-mactive:after:block md:group-mactive:h-0
+
+              dark:after:bg-[#292f3d]">
+                <span class="md:group-mactive:hidden">Pages</span>
+              </h5>
+            
+          
+            
+              <a class="flex items-center my-2 h-10 rounded
+              mactive:bg-primary-500 mactive:text-white
+              hover:bg-gray-100
+              dark:hover:bg-gray-900"  
+                href="error-page.html"
+                
+              >
+                <ion-icon class="block text-xl px-3" name="bug-outline"></ion-icon>
+                <span class="block 
+                  md:group-mactive:hidden">Error</span>
+              </a>
+            
+          
+            
+              <a class="flex items-center my-2 h-10 rounded
+              mactive:bg-primary-500 mactive:text-white
+              hover:bg-gray-100
+              dark:hover:bg-gray-900"  
+                href="info-page.html"
+                
+              >
+                <ion-icon class="block text-xl px-3" name="information-circle-outline"></ion-icon>
+                <span class="block 
+                  md:group-mactive:hidden">Info</span>
+              </a>
+            
+          
+            
+              <a class="flex items-center my-2 h-10 rounded
+              mactive:bg-primary-500 mactive:text-white
+              hover:bg-gray-100
+              dark:hover:bg-gray-900"  
+                href="success-page.html"
+                
+              >
+                <ion-icon class="block text-xl px-3" name="shield-checkmark-outline"></ion-icon>
+                <span class="block 
+                  md:group-mactive:hidden">Success</span>
+              </a>
+            
+          
+            
+              <a class="flex items-center my-2 h-10 rounded
+              mactive:bg-primary-500 mactive:text-white
+              hover:bg-gray-100
+              dark:hover:bg-gray-900"  
+                href="warn-page.html"
+                
+              >
+                <ion-icon class="block text-xl px-3" name="warning-outline"></ion-icon>
+                <span class="block 
+                  md:group-mactive:hidden">Warn</span>
+              </a>
+            
+          
+        </nav>
+      </div>
+      <!-- LEFT SIDEBAR CLOSED -->
+
+      <!-- MAIN CONTENT -->
+      <div
+        id="m-main-content"
+        class="bg-gray-50 group ml-auto transition-size w-full
+        md:w-[calc(100%-16rem)]
+        md:mactive:w-[calc(100%-4rem)]
+        dark:bg-gray-900"
+      >
+        <!-- TOPBAR -->
+        <header class="fixed top-0 right-0 h-16 bg-white border-b border-gray-100 z-20 flex items-center justify-between transition-size w-full
+        md:w-[calc(100%-16rem)]
+        md:group-mactive:w-[calc(100%-4rem)]
+        dark:bg-[#1d2432] dark:border-[#292f3d]">
+          <label for="m-control-left-sidebar" class="px-2 mx-4 flex items-center cursor-pointer">
+            <ion-icon class="text-xl scale-[1.1]" name="menu-outline"></ion-icon>
+          </label>
+          <div class="h-16 px-4 flex items-center u
+            md:hidden">
+            <img class="w-7 h-7" src="assets/images/logo-only.svg" alt="Mintailor Logo Only">
+            <img class="ml-4 w-auto h-6
+              md:group-mactive:hidden
+              dark:invert" 
+              src="assets/images/text-only.svg" alt="Mintailor Text Only">
+          </div>
+          <label for="m-control-right-sidebar" class="px-2 mx-4 flex items-center cursor-pointer">
+            <ion-icon class="text-xl" name="settings-outline"></ion-icon>
+          </label>
+        </header>
+        <!-- TOPBAR CLOSED -->
+
+        <!-- CONTENT -->
+        <main class="min-h-[calc(100vh-4rem)] w-full p-4 mt-16">
+<h1 class="text-3xl mt-4 font-semibold">Alert</h1>
+
+<div class="p-4 rounded border bg-white border-gray-100 mt-4
+dark:bg-gray-900 dark:border-gray-800">
+
+  <div class="codeblock">
+    <div class="bg-primary-200 text-primary-800 p-4 rounded mb-4 flex items-center">
+      <ion-icon class="text-lg mr-3" name="alert-circle"></ion-icon>
+      <span>Primary Alert! This is a <a class="font-semibold underline" href="#">example link</a> to preview.</span>
+      <span class="ml-auto"></span>
+      <ion-icon class="text-lg" name="close"></ion-icon>  
+    </div>
+
+    <div class="bg-secondary-200 text-secondary-800 p-4 rounded mb-4 flex items-center">
+      <ion-icon class="text-lg mr-3" name="alert-circle"></ion-icon>
+      <span>Secondary Alert! This is a <a class="font-semibold underline" href="#">example link</a> to preview.</span>
+      <span class="ml-auto"></span>
+      <ion-icon class="text-lg" name="close"></ion-icon>  
+    </div>
+
+    <div class="bg-success-200 text-success-800 p-4 rounded mb-4 flex items-center">
+      <ion-icon class="text-lg mr-3" name="alert-circle"></ion-icon>
+      <span>Success Alert! This is a <a class="font-semibold underline" href="#">example link</a> to preview.</span>
+      <span class="ml-auto"></span>
+      <ion-icon class="text-lg" name="close"></ion-icon>  
+    </div>
+
+    <div class="bg-danger-200 text-danger-800 p-4 rounded mb-4 flex items-center">
+      <ion-icon class="text-lg mr-3" name="alert-circle"></ion-icon>
+      <span>Danger Alert! This is a <a class="font-semibold underline" href="#">example link</a> to preview.</span>
+      <span class="ml-auto"></span>
+      <ion-icon class="text-lg" name="close"></ion-icon>  
+    </div>
+
+    <div class="bg-info-200 text-info-800 p-4 rounded mb-4 flex items-center">
+      <ion-icon class="text-lg mr-3" name="alert-circle"></ion-icon>
+      <span>Info Alert! This is a <a class="font-semibold underline" href="#">example link</a> to preview.</span>
+      <span class="ml-auto"></span>
+      <ion-icon class="text-lg" name="close"></ion-icon>  
+    </div>
+
+    <div class="bg-warn-200 text-warn-800 p-4 rounded mb-4 flex items-center">
+      <ion-icon class="text-lg mr-3" name="alert-circle"></ion-icon>
+      <span>Warn Alert! This is a <a class="font-semibold underline" href="#">example link</a> to preview.</span>
+      <span class="ml-auto"></span>
+      <ion-icon class="text-lg" name="close"></ion-icon>  
+    </div>
+  </div>
+  
+</div>
+        </main>
+        <!-- CONTENT CLOSED -->
+      </div>
+      <!-- MAIN CONTENT CLOSED -->
+    </div>
+    <!-- WRAPPER CLOSED -->
+  </div>
+  <!-- LAYOUT CLOSED -->
+
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  <script src="assets/js/prism.js"></script>
+
+  <script>
+    // sidebar
+    const mLeftSideBar = document.getElementById('m-left-sidebar');
+    const mMainContent = document.getElementById('m-main-content');
+    const mControlLeftSidebar = document.getElementById('m-control-left-sidebar');
+    mControlLeftSidebar.addEventListener('change', e => {
+      if (e.target.checked){
+        mLeftSideBar.setAttribute('active', true);
+        mMainContent.setAttribute('active', true);
+      } else {
+        mLeftSideBar.removeAttribute('active');
+        mMainContent.removeAttribute('active');
+      }
+    });
+
+    // highlight code
+    const blocks = document.querySelectorAll('.codeblock');
+    for (let block of blocks){
+      let preview = document.createElement('div');
+      preview.className = 'preview';
+      preview.innerHTML = block.innerHTML;
+
+      let code = document.createElement('pre');
+      code.className = 'code myscroll';
+
+      let raw = preview.innerHTML.replace(/^\s+$/gm, '').trim();
+      let minTab = Math.min.apply(null, raw.split('\n').filter(i => i).slice(1).map(row => {
+        let i = 0;
+        while (i < row.length){
+          if (row[i] === ' '){
+            i++;
+            continue;
+          }
+
+          break;
+        }
+        
+        return i
+      }));
+
+      raw = raw.replace(new RegExp(`^\\s{${minTab}}`, 'gm'), '');
+
+      let html = Prism.highlight(raw, Prism.languages.html, 'html');
+      code.innerHTML = html;
+
+      block.innerHTML = preview.outerHTML;
+      block.appendChild(code);
+    }
+
+    // theme
+    function toBoolean(v){
+      if (typeof v === 'string')
+        return v === 'true';
+
+      return !!v;
+    }
+
+    function autoTheme(){
+      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+        themeSelector.checked = true;
+      } else {
+        document.documentElement.classList.remove('dark');
+        themeSelector.checked = false;
+      }
+    }
+
+    function toggleMode(mode){
+      localStorage.theme = mode;
+
+      autoTheme();
+    }
+
+    const themeSelector = document.getElementById('m-theme-selector');
+    themeSelector.addEventListener('change', e => {
+      toggleMode(e.target.checked ? 'dark' : 'light');
+    });
+
+    autoTheme();
+
+    // loader
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('m-loader').classList.add('opacity-0');
+
+        setTimeout(() => {
+          document.getElementById('m-loader').classList.add('hidden');
+        }, 500);
+      }, 500);
+    });
+  </script>
+</body>
+</html>
