@@ -1,0 +1,26 @@
+<%- await include('.parts/header.ejs', { page: { active: 'Checkbox' } }) %>
+<h1 class="mt-4 text-3xl font-semibold">Checkbox</h1>
+
+<div class="p-4 rounded border bg-white border-gray-100 mt-4
+dark:bg-gray-900 dark:border-gray-800">
+
+  <div class="codeblock">
+    <div class="inline-flex items-center space-x-2 mr-4">
+      <input type="checkbox" class="w-4 h-4 border rounded text-primary-500
+      focus:ring-3 focus:ring-primary-200
+      dark:bg-gray-900 dark:border-gray-500 dark:ring-offset-gray-900
+      dark:focus:ring-primary-800 dark:focus:border-primary-500" id="cb-1">
+      <label for="cb-1">Click to check</label>
+    </div>
+
+    <div class="inline-flex items-center space-x-2 mr-4">
+      <input type="radio" class="w-4 h-4 border rounded-full text-primary-500
+      focus:ring-3 focus:ring-primary-200
+      dark:bg-gray-900 dark:border-gray-500 dark:ring-offset-gray-900
+      dark:focus:ring-primary-800 dark:focus:border-primary-500" id="cb-2">
+      <label for="cb-2">Click to check</label>
+    </div>
+  </div>
+
+</div>
+<%- await include('.parts/footer.ejs') %>
