@@ -13,9 +13,12 @@ npm i -D mintailor
 **tailwind.config.js**
 
 ```js
-export default {
-  content: ['./node_modules/mintailor/src/components/**/*.{vue,js,ts,jsx,tsx}']
-};
+import { createConfig } from 'mintailor/config';
+
+/** @type {import('tailwindcss').Config} */
+export default createConfig({
+  /* current config */
+});
 ```
 
 ```js
@@ -30,7 +33,7 @@ import { Mintailor } from 'mintailor';
 
 ## Design
 
-- [Figma](https://www.figma.com/file/zDF4uPZcdpfHBFGDUcyYnd/Mintailor?type=design&t=suwneclqFzisczIs-6)
+[Figma](https://www.figma.com/file/zDF4uPZcdpfHBFGDUcyYnd/Mintailor?type=design&t=suwneclqFzisczIs-6)
 
 ## License
 

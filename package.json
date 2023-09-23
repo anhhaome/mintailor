@@ -1,13 +1,16 @@
 {
   "name": "mintailor",
-  "version": "1.0.0-beta.0",
+  "version": "1.0.0-beta.1",
   "description": "A Vue Component Library which was built on TailwindCSS.",
   "exports": {
-    ".": "./src/index.js"
+    ".": "./src/index.js",
+    "./config": "./src/config.js"
   },
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
     "publish:beta": "npm publish --access public --tag beta",
     "publish:release": "npm publish --access public"
   },
@@ -26,10 +29,10 @@
     "@vitejs/plugin-vue": "^4.3.4",
     "autoprefixer": "^10.4.16",
     "postcss": "^8.4.30",
-    "tailwindcss": "^3.3.3",
     "vite": "^4.4.9"
   },
   "peerDependencies": {
+    "tailwindcss": "^3.3.3",
     "vue": "^3.3.4"
   }
 }
