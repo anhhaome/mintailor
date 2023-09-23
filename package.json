@@ -1,48 +1,35 @@
 {
   "name": "mintailor",
-  "version": "0.0.1",
-  "description": "A Tailwind CSS Components",
-  "main": "index.js",
+  "version": "1.0.0-beta.0",
+  "description": "A Vue Component Library which was built on TailwindCSS.",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "type": "module",
   "scripts": {
-    "watch-css": "npx tailwindcss -i ./src/assets/css/main.css -o ./dist/assets/css/output.css --watch",
-    "build": "node scripts/build.js ./src ./dist && npx tailwindcss -i ./src/main.css -o ./dist/output.css",
-    "live": "live-server ./dist --no-browser --no-css-inject --wait=1500",
-    "dev": "MINTAILOR_WATCH=1 npm run build & npm run live & npm run watch-css",
-    "deploy": "push-dir --dir=dist --branch=gh-pages --cleanup",
-    "lint:check": "eslint .",
-    "lint:fix": "eslint . --fix",
-    "lint": "npm run lint:fix",
-    "prepare": "husky install"
+    "dev": "vite",
+    "publish:beta": "npm publish --access public --tag beta",
+    "publish:release": "npm publish --access public"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/anhhaome/mintailor.git"
-  },
-  "author": "anhhao.me <hi@anhhao.me>",
+  "keywords": [
+    "Rugo",
+    "Vue",
+    "Vite",
+    "TailwindCSS",
+    "Component",
+    "UI",
+    "Library"
+  ],
+  "author": "HaoVA <hi@haova.me> (https://www.haova.me)",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/anhhaome/mintailor/issues"
-  },
-  "homepage": "https://github.com/anhhaome/mintailor#readme",
   "devDependencies": {
-    "@koa/router": "^10.1.1",
-    "chai": "^4.3.4",
-    "chokidar": "^3.5.3",
-    "ejs": "^3.1.6",
-    "eslint": "^8.15.0",
-    "eslint-config-standard": "^17.0.0",
-    "fs-extra": "^10.0.1",
-    "husky": "^8.0.1",
-    "koa": "^2.13.4",
-    "live-server": "^1.2.1",
-    "mocha": "^9.1.3",
-    "mz": "^2.7.0",
-    "nodemon": "^2.0.15",
-    "nyc": "^15.1.0",
-    "object-path": "^0.11.8",
-    "push-dir": "^0.4.1",
-    "ramda": "^0.27.1",
-    "supertest": "^6.1.6",
-    "tailwindcss": "^3.0.22"
+    "@vitejs/plugin-vue": "^4.3.4",
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.30",
+    "tailwindcss": "^3.3.3",
+    "vite": "^4.4.9"
+  },
+  "peerDependencies": {
+    "vue": "^3.3.4"
   }
 }
