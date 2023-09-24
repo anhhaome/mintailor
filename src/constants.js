@@ -5,3 +5,9 @@ export const BUTTON_VARIANT = {
   OUTLINE: 'outline',
   SOLID: 'solid'
 };
+
+export const PANEL_TYPE = {
+  PANEL: 'panel',
+  DROPDOWN: 'dropdown',
+  MODAL: 'modal'
+};
