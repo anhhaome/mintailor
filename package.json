@@ -1,6 +1,6 @@
 {
   "name": "mintailor",
-  "version": "1.0.0-beta.3",
+  "version": "1.0.0-beta.4",
   "description": "A Vue Component Library which was built on TailwindCSS.",
   "exports": {
     ".": "./src/index.js",

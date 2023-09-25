@@ -121,7 +121,7 @@ const dump = (form) => alert(JSON.stringify(form, 0, 2));
       <!-- input -->
       <div class="p-3 border-r border-b border-zinc-300">
         <Form @submit="dump" v-slot="{ resetForm }">
-          <Input class="mb-3" label="Name" />
+          <Input class="mb-3" label="Name" autofocus />
 
           <Input class="mb-3" label="Email" type="email" />
 

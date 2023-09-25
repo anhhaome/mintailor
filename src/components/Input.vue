@@ -7,6 +7,7 @@ const props = defineProps({
   name: String,
   label: String,
   type: { type: String, default: 'text' },
+  autofocus: Boolean,
   modelValue: {}
 });
 
@@ -24,7 +25,7 @@ const { value } = useField(() => nameOrLabel.value, undefined, {
       :for="nameOrLabel"
       :class="
         'block h-8 border-zinc-300 bg-zinc-50 w-full ' +
-        (type === 'checkbox' ? 'py-1.5' : 'border py-[0.3125rem] px-[0.6875rem]')
+        (type === 'checkbox' ? 'py-1.5' : 'border py-[0.3125rem] px-[0.6875rem] cursor-text')
       "
     >
       <input
@@ -37,6 +38,7 @@ const { value } = useField(() => nameOrLabel.value, undefined, {
         :id="nameOrLabel"
         :type="type"
         :name="nameOrLabel"
+        :autofocus="autofocus"
       />
     </label>
   </div>
