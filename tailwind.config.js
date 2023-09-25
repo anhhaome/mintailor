@@ -8,7 +8,7 @@ export default createConfig({
       sans: ['"Hanken Grotesk"', 'sans-serif'],
       mono: ['"JetBrains Mono"', 'monospace']
     },
-    colors: ['rose']
+    colors: ['rose', 'zinc']
   },
   plugins: []
 });

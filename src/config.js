@@ -1,5 +1,5 @@
 import colors from 'tailwindcss/colors';
-import { MINTAILOR_CONTENT } from './constants.js';
+import { MINTAILOR_CLASSES, MINTAILOR_CONTENT } from './constants.js';
 
 delete colors.lightBlue;
 delete colors.warmGray;
@@ -31,6 +31,7 @@ export const createConfig = function (config = {}) {
 
   // safelist
   config.safelist ||= [];
+  config.safelist.push.apply(config.safelist, MINTAILOR_CLASSES);
   if (colorSafeList)
     config.safelist.push.apply(config.safelist, [
       {

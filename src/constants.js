@@ -11,3 +11,12 @@ export const PANEL_TYPE = {
   DROPDOWN: 'dropdown',
   MODAL: 'modal'
 };
+
+export const MINTAILOR_CLASSES = [
+  'text-sm',
+  'antialias',
+  'font-sans',
+  'bg-zinc-50',
+  'text-zinc-950',
+  'leading-tight'
+];

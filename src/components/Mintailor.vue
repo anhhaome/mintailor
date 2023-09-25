@@ -1,7 +1,16 @@
+<script setup>
+import { onMounted, onUnmounted } from 'vue';
+import { MINTAILOR_CLASSES } from '../constants.js';
+
+onMounted(() => {
+  document.body.classList.add.apply(document.body.classList, MINTAILOR_CLASSES);
+});
+
+onUnmounted(() => {
+  document.body.classList.remove.apply(document.body.classList, MINTAILOR_CLASSES);
+});
+</script>
+
 <template>
-  <div
-    class="text-sm antialias font-sans bg-zinc-50 text-zinc-950 leading-tight min-w-screen min-h-screen"
-  >
-    <slot></slot>
-  </div>
+  <slot></slot>
 </template>

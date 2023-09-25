@@ -1,8 +1,11 @@
 <script setup>
 import { reactive } from 'vue';
-import { Mintailor, Button, Panel } from './index.js';
+import { Mintailor, Button, Input, Panel } from './index.js';
+import { Form } from 'vee-validate';
 
 const state = reactive({});
+
+const dump = (form) => alert(JSON.stringify(form, 0, 2));
 </script>
 
 <template>
@@ -25,6 +28,10 @@ const state = reactive({});
           <Button variant="none" color="rose">none</Button>
           <Button variant="outline" color="rose">outline</Button>
           <Button variant="solid" color="rose">solid</Button>
+
+          <Button variant="none" color="zinc">none</Button>
+          <Button variant="outline" color="zinc">outline</Button>
+          <Button variant="solid" color="zinc">solid</Button>
 
           <div class="text-center">
             <Button variant="none" icon>
@@ -104,9 +111,32 @@ const state = reactive({});
           <div class="h-8 leading-8 text-center bg-zinc-300">Light Gray</div>
           <div class="h-8 leading-8 text-center bg-zinc-500 text-zinc-50">Gray</div>
           <div class="h-8 leading-8 text-center bg-zinc-700 text-zinc-50">Dark Gray</div>
+
+          <div class="h-8 leading-8 text-center bg-rose-300">Light Rose</div>
+          <div class="h-8 leading-8 text-center bg-rose-500 text-zinc-50">Rose</div>
+          <div class="h-8 leading-8 text-center bg-rose-700 text-zinc-50">Dark Rose</div>
         </div>
       </div>
-      <div class="p-2"></div>
+
+      <!-- input -->
+      <div class="p-3 border-r border-b border-zinc-300">
+        <Form @submit="dump" v-slot="{ resetForm }">
+          <Input class="mb-3" label="Name" />
+
+          <Input class="mb-3" label="Email" type="email" />
+
+          <Input class="mb-3" label="Password" type="password" />
+
+          <Input class="mb-3" label="Date of Birth" type="date" />
+
+          <Input class="mb-3" label="Male" type="checkbox" />
+
+          <div class="flex justify-between">
+            <Button type="submit" variant="solid">Save</Button>
+            <Button @click="resetForm()">Reset</Button>
+          </div>
+        </Form>
+      </div>
       <div class="p-2"></div>
       <div class="p-2"></div>
     </div>

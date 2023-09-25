@@ -4,7 +4,8 @@ import { BUTTON_VARIANT } from '../constants.js';
 defineProps({
   variant: { type: String, default: BUTTON_VARIANT.NONE },
   color: { type: String },
-  icon: { type: Boolean }
+  icon: { type: Boolean },
+  type: { type: String, default: 'button' }
 });
 </script>
 
@@ -28,6 +29,7 @@ defineProps({
       ' ' +
       (icon ? 'w-8 px-1' : 'px-2.5')
     "
+    :type="type"
   >
     <slot></slot>
   </button>
